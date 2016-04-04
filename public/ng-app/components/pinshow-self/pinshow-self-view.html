@@ -1,5 +1,5 @@
-<!-- /ng-app/components/pinshow/pinshow-view.html -->
-<div class="pca-pinshow">
+<!-- /ng-app/components/pinshow-self/pinshow-self-view.html -->
+<div class="pca-pinshow-self">
   <h1>All pins</h1>
 
   <div class="pca-pinshow-content">
@@ -10,7 +10,9 @@
       <br>
       {{pin.pinname}}
       <br>
-      <a ng-click="filterUser(pin.username)">{{pin.username}}</a>
+      {{pin.username}}
+      <br>
+      <a ng-click="deletePin(pin._id)">delete</a>
     </div>
 
   </div>

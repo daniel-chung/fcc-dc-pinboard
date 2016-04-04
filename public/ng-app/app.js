@@ -8,7 +8,8 @@ angular.module('pca', [
     'ngRoute',
     'pca.navigator',
     'pca.pinadd',
-    'pca.pinshow'
+    'pca.pinshow',
+    'pca.pinshowself'
   ])
 
   .config(['$routeProvider', function ($routeProvider) {

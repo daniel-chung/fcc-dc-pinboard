@@ -21,7 +21,7 @@ module.exports = function(app, passport) {
   app.get('/auth/twitter', passport.authenticate('twitter'));
   app.get('/auth/twitter/callback',
     passport.authenticate('twitter',
-      { successRedirect: '/',
+      { successRedirect: '/#/pinshowself',
         failureRedirect: '/login' }));
   app.route('/auth/isloggedin')
     .get(function(req, res) {
@@ -36,8 +36,16 @@ module.exports = function(app, passport) {
   app.route('/api/pinshow/all')
     .get(pinsService.getall);
 
+  app.route('/api/pinshow/self')
+    .get(pinsService.getself);
+
   app.route('/api/pinshow/:username')
     .get(pinsService.getuser);
+
+  app.route('/api/pindelete/:pinid')
+    .delete(pinsService.deletepin);
+
+
 
 }
 

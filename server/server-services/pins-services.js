@@ -39,6 +39,22 @@ function PinsServices () {
     );
   };
 
+  // Fetches current user's pins ------------------------------------------ //
+  // TODO(): limit to some number of pins (50?)
+  this.getself = function (req, res) {
+    console.log("inside pinservice getself");
+    console.log('current user:', req.user);
+    var currUsername = req.user.twitter.username;
+    Pins.find(
+      {"username": currUsername},
+      function(err, pins) {
+        if (err)
+          throw err;
+        res.json(pins);
+      }
+    );
+  };
+
   // Fetches a user's pins ------------------------------------------------ //
   // TODO(): limit to some number of pins (50?)
   this.getuser = function (req, res) {
@@ -54,6 +70,30 @@ function PinsServices () {
     );
   };
 
+
+  // Deletes a user's pin ------------------------------------------------- //
+  this.deletepin = function (req, res) {
+    console.log("inside pinservice deletepin");
+    console.log("delete pin param:", req.params);
+    var currPinid = req.params.pinid;
+    var currUsername = req.user.twitter.username;
+    Pins.findOneAndRemove(
+      {"_id": currPinid},
+      function(err, pins) {
+        if (err)
+          throw err;
+
+        // If there are no errors, return the user's data
+        Pins.find(
+          {"username": currUsername},
+          function(err, pins) {
+            if (err)
+              throw err;
+            res.json(pins);
+        });
+
+    });
+  };
 
 
 };
