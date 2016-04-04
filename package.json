@@ -1,0 +1,37 @@
+{
+  "name": "pint-clone",
+  "version": "1.0.0",
+  "description": "Pinterest clone",
+  "main": "server.js",
+  "scripts": {
+    "postinstall": "./node_modules/bower/bin/bower install",
+    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+    "start:dev": "nodemon server.js",
+    "start:prod": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "./node_modules/bower/bin/bower install"
+  },
+  "author": "daniel-chung",
+  "license": "ISC",
+  "dependencies": {
+    "angular": "^1.5.3",
+    "angular-route": "^1.5.3",
+    "body-parser": "^1.15.0",
+    "bower": "^1.7.7",
+    "browserify": "^13.0.0",
+    "cookie-parser": "^1.4.1",
+    "cors": "^2.7.1",
+    "dotenv": "^2.0.0",
+    "express": "^4.13.4",
+    "express-session": "^1.13.0",
+    "gulp": "^3.9.1",
+    "if-env": "^1.0.0",
+    "method-override": "^2.3.5",
+    "mongoose": "^4.4.10",
+    "morgan": "^1.7.0",
+    "passport": "^0.3.2",
+    "passport-twitter": "^1.0.4",
+    "session": "^0.1.0",
+    "vinyl-source-stream": "^1.1.0"
+  }
+}
