@@ -1,16 +1,24 @@
 {
   "name": "pint-clone",
   "version": "1.0.0",
+  "engines": {
+    "node": "5.5.0",
+    "npm": "3.5.3"
+  },
   "description": "Pinterest clone",
   "main": "server.js",
   "scripts": {
-    "postinstall": "./node_modules/bower/bin/bower install",
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
     "start:dev": "nodemon server.js",
     "start:prod": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "./node_modules/bower/bin/bower install"
   },
+  "keywords": [
+    "pinterest",
+    "react",
+    "javascript"
+  ],
   "author": "daniel-chung",
   "license": "ISC",
   "dependencies": {
