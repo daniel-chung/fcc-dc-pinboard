@@ -27,7 +27,10 @@ module.exports = function(app, passport) {
     .get(function(req, res) {
       res.send(req.isAuthenticated());
     });
-
+  app.get('/auth/logout', function(req, res){
+    req.logout();
+    res.redirect('/');
+  });
 
   // API routes ----------------------------------------------------------- //
   app.route('/api/pinadd')

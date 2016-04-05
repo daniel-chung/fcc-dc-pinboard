@@ -23,8 +23,7 @@
 
         // Define services
         $scope.pinadd = function() {
-          $http
-            .post('/api/pinadd', $scope.pinaddForm)
+          $http.post('/api/pinadd', $scope.pinaddForm)
             .then(
                 function successCallback(response) {
                   console.log("post success");

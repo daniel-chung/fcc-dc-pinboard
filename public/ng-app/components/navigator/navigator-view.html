@@ -1,21 +1,26 @@
 <!-- /ng-app/components/navigator/navigator-view.html -->
-<div class="pca-navigator">
+<div class="pca-navigator" ng-controller="pcaNavigatorCtrl">
   <nav>
     <div class="pca-navigator-link">
       <a href="#/">Home</a>
     </div>
 
-    <div class="pca-navigator-link">
+    <div class="pca-navigator-link" ng-if="loggedIn === true">
       <a href="#/pinshowself">My pins</a>
     </div>
 
-    <div class="pca-navigator-link">
+    <div class="pca-navigator-link" ng-if="loggedIn === true">
       <a href="#/pinadd">Add pin</a>
     </div>
 
     <br>
     <form action="/auth/twitter">
       <input type="submit" value="Log in with twitter"/>
+    </form>
+
+    <br>
+    <form action="/auth/logout" ng-if="loggedIn === true">
+      <input type="submit" value="Sign out"/>
     </form>
 
   </nav>
