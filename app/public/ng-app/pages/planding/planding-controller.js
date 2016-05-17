@@ -5,6 +5,7 @@ var pLandingCtrl = function() {
   this.testCtrlVal = "tesing watchify part 2";
 }
 
+
 module.exports = pLandingCtrl;
 
 

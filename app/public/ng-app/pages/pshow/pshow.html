@@ -1,3 +1,24 @@
 <div class="pb-show">
-  <pb-showpins owners="pshowCtrl.owner"/>
+
+  <div class="pb-pshow-content">
+    <h1>{{pshowCtrl.title_}}</h1>
+    
+    <div class="pb-pshow-img-div"
+         ng-repeat="pin in pshowCtrl.pins_ track by pin._id">
+      
+      <img ng-src="{{pin.url}}" alt="pin image" class="pb-pshow-img"
+           onError="this.onerror=null;this.src='/images/errImg.png';">
+      <br>
+
+      {{pin.pinname}}
+      <br>
+      
+      <a ui-sref="pshow.username({username: pin.username})"
+         class="pb-pshow-user">
+        {{pin.username}}
+      </a>
+
+    </div>
+  </div>
+
 </div>

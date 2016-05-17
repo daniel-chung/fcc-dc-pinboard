@@ -18,7 +18,6 @@ var pRegister = require('./pages/pregister');
 
 // Components
 var navigator = require('./components/navigator');
-var showpins  = require('./components/showpins');
 
 // Services
 var sFetchpins = require('./services/fetchpins');
@@ -37,7 +36,6 @@ var Application = angular.module('pb.application', [
     pAddpin.name,
     pRegister.name,
     navigator.name,
-    showpins.name,
     sFetchpins.name
 ]);
 
@@ -86,6 +84,8 @@ Application.config(function ($stateProvider, $urlRouterProvider) {
   // Default to the root
   $urlRouterProvider.otherwise("/");
 
+  $urlRouterProvider.when("/", "/all");
+
   // Configure the states for Angular UI Routing
   $stateProvider
     .state('planding', {
@@ -98,11 +98,47 @@ Application.config(function ($stateProvider, $urlRouterProvider) {
     // Make this an abstract class?
     .state('pshow', {
       url: "/",
-      templateUrl: "ng-app/pages/pshow/pshow.html",
-      controller: 'pb.pshow.pshowCtrl',
-      controllerAs: 'pshowCtrl',
+      abstract: true,
+      templateUrl: "ng-app/pages/pshow/pshow-shell.html",
       access: {restricted: false}
     })
+      .state('pshow.all', {
+        url: "all",
+        resolve: {
+          pinOwners: function() { return 'all'; }
+        },
+        templateUrl: "ng-app/pages/pshow/pshow.html",
+        controller: 'pb.pshow.pshowCtrl',
+        controllerAs: 'pshowCtrl',
+        access: {restricted: false}
+      })
+      
+      .state('pshow.username', {
+        url: "user/:username",
+        resolve: {
+          pinOwners: function($stateParams) { 
+            return $stateParams.username;
+          }
+        },
+        templateUrl: "ng-app/pages/pshow/pshow.html",
+        controller: 'pb.pshow.pshowCtrl',
+        controllerAs: 'pshowCtrl',
+        access: {restricted: false}
+      })
+
+      .state('pshow.self', {
+        url: "self",
+        resolve: {
+          pinOwners: function() {
+            return 'self';
+          }
+        },
+        templateUrl: "ng-app/pages/pshow/pshow.html",
+        controller: 'pb.pshow.pshowCtrl',
+        controllerAs: 'pshowCtrl',
+        access: {restricted: true}
+      })
+
     .state('paddpin', {
       url: "/paddpin",
       templateUrl: "ng-app/pages/paddpin/paddpin.html",

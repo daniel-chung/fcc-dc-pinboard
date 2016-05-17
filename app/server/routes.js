@@ -6,7 +6,7 @@ var PinsServices = require('./server-services/pins-services.js');
 
 
 // Specify express routes ------------------------------------------------------
-module.exports = function(app, passport) {
+var ExpressRoutes = function(app, passport) {
 
   // Services ------------------------------------------------------------- //
   var pinsService = new PinsServices();
@@ -23,21 +23,23 @@ module.exports = function(app, passport) {
 
   app.get('/auth/twitter/callback',
     passport.authenticate('twitter',
-      { successRedirect: '/#/pinshowself',
+      { successRedirect: '/#/self',
         failureRedirect: '/#/' }));
 
   app.post('/auth/local/signup',
     passport.authenticate('local-signup',
-      { successRedirect: '/#/pinshowself',
+      { successRedirect: '/#/self',
         failureRedirect: '/#/pregister' }));
 
   app.post('/auth/local/login',
     passport.authenticate('local-login',
-      { successRedirect: '/#/pinshowself',
+      { successRedirect: '/#/self',
         failureRedirect: '/#/pregister' }));
 
   app.route('/auth/isloggedin')
     .get(function(req, res) {
+      console.log('inside isloggedin');
+      console.log('req.isAuthenticated', req.isAuthenticated());
       res.send(req.isAuthenticated());
     });
 
@@ -61,7 +63,10 @@ module.exports = function(app, passport) {
 
   app.route('/api/pindelete/:pinid')
     .delete(pinsService.deletepin);
-
 }
+
+
+module.exports = ExpressRoutes;
+
 
 // EOF -------------------------------------------------------------------------

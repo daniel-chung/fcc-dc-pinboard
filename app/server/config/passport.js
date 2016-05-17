@@ -11,8 +11,7 @@ var User = require('../models/users');
 
 
 // Expose this function to our app ---------------------------------------------
-module.exports = function(passport) {
-
+var PassportConfig = function(passport) {
 
   // Serialize & Deserialize user ----------------------------------------- //
   passport.serializeUser(function(user, cb) {
@@ -54,7 +53,7 @@ module.exports = function(passport) {
   }));
 
 
-  // Local ---------------------------------------------------------------- //
+  // Local Sign up -------------------------------------------------------- //
   passport.use('local-signup', new LocalStrategy({
     usernameField:    'email',
     passwordField:    'password',
@@ -87,6 +86,7 @@ module.exports = function(passport) {
     );
   }));
 
+  // Local Register ------------------------------------------------------- //
   passport.use('local-login', new LocalStrategy({
     usernameField:    'email',
     passwordField:    'password',
@@ -111,7 +111,10 @@ module.exports = function(passport) {
     );
   }));
 
-};
+}; // End passportConfig
+
+
+module.exports = PassportConfig;
 
 
 // EOF -------------------------------------------------------------------------

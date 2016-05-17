@@ -1,10 +1,10 @@
 <div class="pb-navigator">
-  <md-toolbar class="md-hue-6">
-    <md-menu-bar layout="row">
+  <md-toolbar class="md-hue-6" layout="row">
+    <div class="md-toolbar-tools">
 
       <!-- 1. Title -->
       <span>
-        <a ui-sref="pshow" class="pb-no-link">
+        <a ui-sref="pshow.all" class="pb-no-link">
           <h2 class="md-toolbar-tools">Pinboard</h2>
         </a>
       </span>
@@ -13,96 +13,94 @@
       <span flex></span>
 
       <!-- 3. (hidden) Go to my pins -->
-      <div class="pb-inline-block" ng-if="navigatorCtrl.loggedIn === true">
-        <button>
-          <a ui-sref="pshowself" class="pb-no-link">
-            My pins {{ navigatorCtrl.loggedIn }}
-          </a>
-        </button>
-      </div>
+      <md-button ui-sref="pshow.self" ng-if="navigatorCtrl.loggedIn === true">
+        My pins
+      </md-button>
 
       <!-- 4. (hidden) Add a pin -->
-      <div class="pb-inline-block" ng-if="navigatorCtrl.loggedIn === true">
-        <a ui-sref="paddpin">Add pin</a>
-      </div>
+      <md-button ui-sref="paddpin" ng-if="navigatorCtrl.loggedIn === true">
+        Add pin
+      </md-button>
 
       <!-- 5. Authentication -->
-      <md-menu md-offset="0 12"  ng-if="navigatorCtrl.loggedIn === false">
+      <md-menu-bar layout="row" ng-if="navigatorCtrl.loggedIn === false">
+        <md-menu md-offset="0 12">
 
-        <!-- 5.a Open up the menu -->
-        <button ng-click="$mdOpenMenu()" class="pd-navigator-auth-btn">
-          Sign in / Join
-          <md-icon md-svg-icon="images/ic_arrow_drop_down_white_24px.svg" />
-        </button>
+          <!-- 5.a Open up the menu -->
+          <button ng-click="$mdOpenMenu()" class="pd-navigator-auth-btn">
+            Sign in / Join
+            <md-icon md-svg-icon="images/ic_arrow_drop_down_white_24px.svg" />
+          </button>
 
-        <!-- 5.b Menu contents -->
-        <md-menu-content width="4" >
+          <!-- 5.b Menu contents -->
+          <md-menu-content width="4" >
 
-          <!-- 5.b.1 Twitter login -->
-          <md-menu-item >
-            <div class="pb-navigator-auth-item1">
-              <md-button href="/auth/twitter">
-                Sign in with twitter
-              </md-button>
-            </div>
-          </md-menu-item>
-
-          <!-- 5.b.2 Divider -->
-          <md-menu-divider></md-menu-divider>
-
-          <!-- 5.b.3 Email login -->
-          <div layout="column" ng-cloak>
-            <md-content layout-padding>
-            <form name="localLogInForm" action="/auth/local/login"
-                  method="post">
-              <div class="pb-text-center">Sign in with E-mail</div>
-
-              <md-input-container class="md-block">
-                <label>E-mail</label>
-                <input required name="email" type="text"
-                       ng-model="local.email">
-                <div ng-messages="localLogInForm.email.$error">
-                  <div ng-message="required">This is required.</div>
-                </div>
-              </md-input-container>
-
-              <md-input-container class="md-block">
-                <label>Password</label>
-                <input required name="password" type="password"
-                       ng-model="local.password">
-                <div ng-messages="localLogInForm.password.$error">
-                  <div ng-message="required">This is required.</div>
-                </div>
-              </md-input-container>
-
-              <div class="pb-text-center">
-                <div class="pb-inline-block">
-                  <md-button type="submit" id="submit" value="Submit">
-                    Sign in
-                  </md-button>
-                </div>
+            <!-- 5.b.1 Twitter login -->
+            <md-menu-item >
+              <div class="pb-navigator-auth-item1">
+                <md-button href="/auth/twitter">
+                  Sign in with twitter
+                </md-button>
               </div>
+            </md-menu-item>
 
-            </form>
-            </md-content>
-          </div>
+            <!-- 5.b.2 Divider -->
+            <md-menu-divider></md-menu-divider>
 
-          <!-- 5.b.4 Divider -->
-          <md-menu-divider></md-menu-divider>
+            <!-- 5.b.3 Email login -->
+            <div layout="column" ng-cloak>
+              <md-content layout-padding>
+              <form name="localLogInForm" action="/auth/local/login"
+                    method="post">
+                <div class="pb-text-center">Sign in with E-mail</div>
 
-          <!-- 5.b.5 Register -->
-          <md-menu-item >
-            <div class="pb-navigator-auth-item1">
-              <md-button ui-sref="pregister">
-                Register
-              </md-button>
+                <md-input-container class="md-block">
+                  <label>E-mail</label>
+                  <input required name="email" type="text"
+                         ng-model="local.email">
+                  <div ng-messages="localLogInForm.email.$error">
+                    <div ng-message="required">This is required.</div>
+                  </div>
+                </md-input-container>
+
+                <md-input-container class="md-block">
+                  <label>Password</label>
+                  <input required name="password" type="password"
+                         ng-model="local.password">
+                  <div ng-messages="localLogInForm.password.$error">
+                    <div ng-message="required">This is required.</div>
+                  </div>
+                </md-input-container>
+
+                <div class="pb-text-center">
+                  <div class="pb-inline-block">
+                    <md-button type="submit" id="submit" value="Submit">
+                      Sign in
+                    </md-button>
+                  </div>
+                </div>
+
+              </form>
+              </md-content>
             </div>
-          </md-menu-item>
+
+            <!-- 5.b.4 Divider -->
+            <md-menu-divider></md-menu-divider>
+
+            <!-- 5.b.5 Register -->
+            <md-menu-item >
+              <div class="pb-navigator-auth-item1">
+                <md-button ui-sref="pregister">
+                  Register
+                </md-button>
+              </div>
+            </md-menu-item>
 
 
-        </md-menu-content>
-      </md-menu>
+          </md-menu-content>
+        </md-menu>
 
-    </md-menu-bar>
+      </md-menu-bar>
+    </div>
   </md-toolbar>
 </div>

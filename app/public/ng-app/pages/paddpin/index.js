@@ -3,8 +3,10 @@
 
 var pAddpinCtrl = require('./paddpin-controller');
 
+
 module.exports = angular
   .module('pb.paddpin', [])
   .controller('pb.paddpin.paddpinCtrl', pAddpinCtrl);
+
 
 // EOF -------------------------------------------------------------------------

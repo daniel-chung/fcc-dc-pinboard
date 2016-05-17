@@ -47,12 +47,12 @@ a.pb-no-link:hover {
    ----------------------------------------------------------------- */
 
 div.pb-pshow-content {
-  border: 1px solid #87CEFA;
+  /*border: 1px solid #87CEFA;*/
   margin: .5em;
   padding: .5em;
 }
 div.pb-pshow-img-div {
-  border: 1px solid #ff9999;
+  /*border: 1px solid #ff9999;*/
   display: inline-block;
   margin: .5em;
   padding: .5em;
@@ -60,25 +60,13 @@ div.pb-pshow-img-div {
 img.pb-pshow-img {
   width: 10em;
 }
-
-
-/* -----------------------------------------------------------------
-   components / showpins / showpins.html
-   ----------------------------------------------------------------- */
-
-div.pb-showpins-content {
-  border: 1px solid #87CEFA;
-  margin: .5em;
-  padding: .5em;
+a.pb-pshow-user {
+  color: #555;
+  font-weight: 500;
+  text-decoration: none;
 }
-div.pb-showpins-img-div {
-  border: 1px solid #ff9999;
-  display: inline-block;
-  margin: .5em;
-  padding: .5em;
-}
-img.pb-showpins-img {
-  width: 10em;
+a.pb-pshow-user:hover {
+  text-decoration: underline;
 }
 
 
@@ -93,4 +81,10 @@ img.pb-showpins-img {
 .pb-navigator-auth-item1 {
   margin: -10px 0 0 0;
 }
+
+.md-toolbar-tools a {
+  color: #fff;
+  text-decoration: none;
+}
+
 

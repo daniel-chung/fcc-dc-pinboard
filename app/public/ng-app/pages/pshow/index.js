@@ -3,8 +3,10 @@
 
 var pShowCtrl = require('./pshow-controller');
 
+
 module.exports = angular
   .module('pb.pshow', [])
   .controller('pb.pshow.pshowCtrl', pShowCtrl);
+
 
 // EOF -------------------------------------------------------------------------

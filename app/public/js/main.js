@@ -19,7 +19,6 @@ var pRegister = require('./pages/pregister');
 
 // Components
 var navigator = require('./components/navigator');
-var showpins  = require('./components/showpins');
 
 // Services
 var sFetchpins = require('./services/fetchpins');
@@ -38,7 +37,6 @@ var Application = angular.module('pb.application', [
     pAddpin.name,
     pRegister.name,
     navigator.name,
-    showpins.name,
     sFetchpins.name
 ]);
 
@@ -87,6 +85,8 @@ Application.config(function ($stateProvider, $urlRouterProvider) {
   // Default to the root
   $urlRouterProvider.otherwise("/");
 
+  $urlRouterProvider.when("/", "/all");
+
   // Configure the states for Angular UI Routing
   $stateProvider
     .state('planding', {
@@ -99,11 +99,47 @@ Application.config(function ($stateProvider, $urlRouterProvider) {
     // Make this an abstract class?
     .state('pshow', {
       url: "/",
-      templateUrl: "ng-app/pages/pshow/pshow.html",
-      controller: 'pb.pshow.pshowCtrl',
-      controllerAs: 'pshowCtrl',
+      abstract: true,
+      templateUrl: "ng-app/pages/pshow/pshow-shell.html",
       access: {restricted: false}
     })
+      .state('pshow.all', {
+        url: "all",
+        resolve: {
+          pinOwners: function() { return 'all'; }
+        },
+        templateUrl: "ng-app/pages/pshow/pshow.html",
+        controller: 'pb.pshow.pshowCtrl',
+        controllerAs: 'pshowCtrl',
+        access: {restricted: false}
+      })
+      
+      .state('pshow.username', {
+        url: "user/:username",
+        resolve: {
+          pinOwners: function($stateParams) { 
+            return $stateParams.username;
+          }
+        },
+        templateUrl: "ng-app/pages/pshow/pshow.html",
+        controller: 'pb.pshow.pshowCtrl',
+        controllerAs: 'pshowCtrl',
+        access: {restricted: false}
+      })
+
+      .state('pshow.self', {
+        url: "self",
+        resolve: {
+          pinOwners: function() {
+            return 'self';
+          }
+        },
+        templateUrl: "ng-app/pages/pshow/pshow.html",
+        controller: 'pb.pshow.pshowCtrl',
+        controllerAs: 'pshowCtrl',
+        access: {restricted: true}
+      })
+
     .state('paddpin', {
       url: "/paddpin",
       templateUrl: "ng-app/pages/paddpin/paddpin.html",
@@ -124,12 +160,13 @@ Application.config(function ($stateProvider, $urlRouterProvider) {
 
 // EOF -------------------------------------------------------------------------
 
-},{"./components/navigator":2,"./components/showpins":5,"./pages/paddpin":8,"./pages/planding":10,"./pages/pregister":12,"./pages/pshow":14,"./services/fetchpins":17,"angular":28,"angular-animate":19,"angular-aria":21,"angular-material":23,"angular-messages":25,"angular-ui-router":26}],2:[function(require,module,exports){
+},{"./components/navigator":2,"./pages/paddpin":5,"./pages/planding":7,"./pages/pregister":9,"./pages/pshow":11,"./services/fetchpins":14,"angular":25,"angular-animate":16,"angular-aria":18,"angular-material":20,"angular-messages":22,"angular-ui-router":23}],2:[function(require,module,exports){
 // /app/public/ng-app/components/navigator/index.js
 'use strict';
 
 var navigatorDirective  = require('./navigator-directive');
 var navigatorController = require('./navigator-controller');
+
 
 module.exports = angular
   .module('pb.navigator', [])
@@ -151,16 +188,13 @@ var navigatorController = function($http, $q) {
   // Call the call back
   this.authCallBack($q, $http).then(
     (function(isLoggedIn) {
-      console.log("isLoggedIn", isLoggedIn);
       this.loggedIn = isLoggedIn;
     }).bind(this)
   )
   .catch(function () {
     console.log('authcall back error');
   });
-  console.log('this.loggedIn', this.loggedIn);
-}
-
+};
 
 
 // Authentication callback
@@ -171,19 +205,15 @@ navigatorController.prototype.authCallBack = function($q, $http) {
 
   $http.get('/auth/isloggedin')
     .success(function (data, status) {
-      console.log('success');
       if (status === 200) {
         deferred.resolve(data);
       }
       else {
         deferred.reject(data);
       }
-      console.log('data', data);
     })
     .error(function (data) {
-      console.log('http error');
       deferred.reject(data);
-      console.log('data', data);
     });
 
   return deferred.promise;
@@ -212,92 +242,20 @@ module.exports = function () {
 // EOF -------------------------------------------------------------------------
 
 },{}],5:[function(require,module,exports){
-// /app/public/ng-app/components/showpins/index.js
-'use strict';
-
-var showpinsDirective  = require('./showpins-directive');
-var showpinsController = require('./showpins-controller');
-
-module.exports = angular
-  .module('pb.showpins', [])
-  .directive('pbShowpins', showpinsDirective)
-  .controller('pb.showpins.showpinsCtrl', showpinsController);
-
-
-// EOF -------------------------------------------------------------------------
-
-},{"./showpins-controller":6,"./showpins-directive":7}],6:[function(require,module,exports){
-// /app/public/ng-app/components/showpins/showpins-controller.js
-'use strict';
-
-var showpinsController = function(Fetchpins, $scope) {
-
-  // Fetchpins service
-  this.fetchpins_ = Fetchpins;
-
-
-  // Data passed in from the directive
-  this.owners_ = $scope.owners;
-
-  // Data model handling the pins to visualize
-  this.pins_;
-
-  // Connect to api
-  this.getPins(this.owners_);
-}
-
-showpinsController.prototype.getPins = function(owners) {
-  this.fetchpins_.getPins(owners).then(
-    this.successCallback.bind(this),
-    this.errorCallback.bind(this)
-  );
-};
-
-showpinsController.prototype.successCallback = function(response) {
-  this.pins_ = response.data;
-};
-showpinsController.prototype.errorCallback = function(response) {
-  console.log(response.status);
-};
-
-
-module.exports = showpinsController;
-
-
-// EOF -------------------------------------------------------------------------
-
-},{}],7:[function(require,module,exports){
-// /app/public/ng-app/components/showpins/showpins-directive.js
-'use strict';
-
-module.exports = function () {
-  return {
-    restrict: 'E',
-    templateUrl: 'ng-app/components/showpins/showpins.html',
-    controller: 'pb.showpins.showpinsCtrl',
-    controllerAs: 'showpinsCtrl',
-    scope: {
-      owners: '='
-    }
-  };
-};
-
-
-// EOF -------------------------------------------------------------------------
-
-},{}],8:[function(require,module,exports){
 // /app/public/ng-app/pages/paddpin/index.js
 'use strict';
 
 var pAddpinCtrl = require('./paddpin-controller');
 
+
 module.exports = angular
   .module('pb.paddpin', [])
   .controller('pb.paddpin.paddpinCtrl', pAddpinCtrl);
 
+
 // EOF -------------------------------------------------------------------------
 
-},{"./paddpin-controller":9}],9:[function(require,module,exports){
+},{"./paddpin-controller":6}],6:[function(require,module,exports){
 // /app/public/ng-app/pages/paddpin/paddpin-controller.js
 'use strict';
 
@@ -312,6 +270,7 @@ var pAddpinCtrl = function(Fetchpins, $http) {
     'url': ''
   };
 }
+
 
 pAddpinCtrl.prototype.pinadd = function(form) {
 
@@ -335,24 +294,27 @@ pAddpinCtrl.prototype.pinadd = function(form) {
   form.$setUntouched();
 };
 
+
 module.exports = pAddpinCtrl;
 
 
 // EOF -------------------------------------------------------------------------
 
-},{}],10:[function(require,module,exports){
-//
+},{}],7:[function(require,module,exports){
+// /app/public/ng-app/pages/planding/index.js
 'use strict';
 
 var pLandingCtrl = require('./planding-controller');
+
 
 module.exports = angular
   .module('pb.planding', [])
   .controller('pb.planding.plandingCtrl', pLandingCtrl);
 
+
 // EOF -------------------------------------------------------------------------
 
-},{"./planding-controller":11}],11:[function(require,module,exports){
+},{"./planding-controller":8}],8:[function(require,module,exports){
 // /app/public/ng-app/pages/planding/planding-controller.js
 'use strict';
 
@@ -360,16 +322,18 @@ var pLandingCtrl = function() {
   this.testCtrlVal = "tesing watchify part 2";
 }
 
+
 module.exports = pLandingCtrl;
 
 
 // EOF -------------------------------------------------------------------------
 
-},{}],12:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 // /app/public/ng-app/pages/pregister/index.js
 'use strict';
 
 var pRegisterCtrl = require('./pregister-controller');
+
 
 module.exports = angular
   .module('pb.pregister', [])
@@ -378,12 +342,11 @@ module.exports = angular
 
 // EOF -------------------------------------------------------------------------
 
-},{"./pregister-controller":13}],13:[function(require,module,exports){
+},{"./pregister-controller":10}],10:[function(require,module,exports){
 // /app/public/ng-app/pages/pregister/pregister-controller.js
 'use strict';
 
-var pRegisterCtrl = function() {
-};
+var pRegisterCtrl = function() {};
 
 
 module.exports = pRegisterCtrl;
@@ -391,65 +354,106 @@ module.exports = pRegisterCtrl;
 
 // EOF -------------------------------------------------------------------------
 
-},{}],14:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 // /app/public/ng-app/pages/pshow/index.js
 'use strict';
 
 var pShowCtrl = require('./pshow-controller');
 
+
 module.exports = angular
   .module('pb.pshow', [])
   .controller('pb.pshow.pshowCtrl', pShowCtrl);
 
+
 // EOF -------------------------------------------------------------------------
 
-},{"./pshow-controller":15}],15:[function(require,module,exports){
+},{"./pshow-controller":12}],12:[function(require,module,exports){
 // /app/public/ng-app/pages/pshow/pshow-controller.js
 'use strict';
 
-var pShowCtrl = function() {
+var pShowCtrl = function(Fetchpins, pinOwners) {
 
-  // Data model handling which pins visualize
-  this.owner = 'all';
+  this.title_ = '';
+  if (pinOwners === 'self') {
+    this.title_ = 'My pins';
+  }
+  else if (pinOwners === 'all') {
+    this.title_ = 'All pins';
+  }
+  else {
+    this.title_ = 'Pins by: ' + pinOwners;
+  }
+
+  // Fetchpins service
+  this.fetchpins_ = Fetchpins;
+
+  // Data model handling the pins to visualize
+  this.pins_;
+
+  // Connect to api
+  this.getPins(pinOwners);
+}
+
+
+pShowCtrl.prototype.getPins = function(owners) {
+  this.fetchpins_.getPins(owners).then(
+    this.successCallback.bind(this),
+    this.errorCallback.bind(this)
+  );
 };
+
+pShowCtrl.prototype.successCallback = function(response) {
+  this.pins_ = response.data;
+};
+
+pShowCtrl.prototype.errorCallback = function(response) {
+  console.log(response.status);
+};
+
 
 module.exports = pShowCtrl;
 
 
 // EOF -------------------------------------------------------------------------
 
-},{}],16:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 // /app/public/ng-app/services/fetchpins/fetchpins-service.js
 'use strict';
 
 var FetchpinsService = function($http) {
+
   // Bind Angular's HTTP service to our service for functional prototypes
   this._http = $http;
 };
+
 
 FetchpinsService.prototype.getPins = function(filter) {
   var apiUrl = '/api/pinshow/' + filter;
   return this._http.get(apiUrl);
 };
 
+
 module.exports = FetchpinsService;
 
 
 // EOF -------------------------------------------------------------------------
 
-},{}],17:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 // /app/public/ng-app/services/fetchpins/index.js
 'use strict';
 
 var FetchpinsService = require('./fetchpins-service');
 
+
 module.exports = angular
   .module('pb.fetchpins', [])
   .service('Fetchpins', FetchpinsService);
 
+
 // EOF -------------------------------------------------------------------------
 
-},{"./fetchpins-service":16}],18:[function(require,module,exports){
+},{"./fetchpins-service":13}],15:[function(require,module,exports){
 /**
  * @license AngularJS v1.5.5
  * (c) 2010-2016 Google, Inc. http://angularjs.org
@@ -4598,11 +4602,11 @@ angular.module('ngAnimate', [])
 
 })(window, window.angular);
 
-},{}],19:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 require('./angular-animate');
 module.exports = 'ngAnimate';
 
-},{"./angular-animate":18}],20:[function(require,module,exports){
+},{"./angular-animate":15}],17:[function(require,module,exports){
 /**
  * @license AngularJS v1.5.5
  * (c) 2010-2016 Google, Inc. http://angularjs.org
@@ -5009,11 +5013,11 @@ ngAriaModule.directive('ngShow', ['$aria', function($aria) {
 
 })(window, window.angular);
 
-},{}],21:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 require('./angular-aria');
 module.exports = 'ngAria';
 
-},{"./angular-aria":20}],22:[function(require,module,exports){
+},{"./angular-aria":17}],19:[function(require,module,exports){
 /*!
  * Angular Material Design
  * https://github.com/angular/material
@@ -29972,7 +29976,7 @@ angular.module("material.core").constant("$MD_THEME_CSS", "/*  Only used with Th
 
 
 })(window, window.angular);;window.ngMaterial={version:{full: "1.0.8"}};
-},{}],23:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 // Should already be required, here for clarity
 require('angular');
 
@@ -29986,7 +29990,7 @@ require('./angular-material');
 // Export namespace
 module.exports = 'ngMaterial';
 
-},{"./angular-material":22,"angular":28,"angular-animate":19,"angular-aria":21}],24:[function(require,module,exports){
+},{"./angular-material":19,"angular":25,"angular-animate":16,"angular-aria":18}],21:[function(require,module,exports){
 /**
  * @license AngularJS v1.5.5
  * (c) 2010-2016 Google, Inc. http://angularjs.org
@@ -30710,11 +30714,11 @@ function ngMessageDirectiveFactory() {
 
 })(window, window.angular);
 
-},{}],25:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 require('./angular-messages');
 module.exports = 'ngMessages';
 
-},{"./angular-messages":24}],26:[function(require,module,exports){
+},{"./angular-messages":21}],23:[function(require,module,exports){
 /**
  * State-based routing for AngularJS
  * @version v0.2.18
@@ -35254,7 +35258,7 @@ angular.module('ui.router.state')
   .filter('isState', $IsStateFilter)
   .filter('includedByState', $IncludedByStateFilter);
 })(window, window.angular);
-},{}],27:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 /**
  * @license AngularJS v1.5.5
  * (c) 2010-2016 Google, Inc. http://angularjs.org
@@ -66123,8 +66127,8 @@ $provide.value("$locale", {
 })(window);
 
 !window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
-},{}],28:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 require('./angular');
 module.exports = angular;
 
-},{"./angular":27}]},{},[1]);
+},{"./angular":24}]},{},[1]);

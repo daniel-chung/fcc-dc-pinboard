@@ -13,6 +13,7 @@ var pAddpinCtrl = function(Fetchpins, $http) {
   };
 }
 
+
 pAddpinCtrl.prototype.pinadd = function(form) {
 
   var successCallback = function (response) {
@@ -34,6 +35,7 @@ pAddpinCtrl.prototype.pinadd = function(form) {
   form.$setPristine();
   form.$setUntouched();
 };
+
 
 module.exports = pAddpinCtrl;
 
