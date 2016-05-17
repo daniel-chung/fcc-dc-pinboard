@@ -14,7 +14,7 @@ An up to date demo of Pinboard can be found on [heroku](http://fcc-dc-pinboard.h
 
 Make sure to install bower files first:
 ```sh
-npm build
+npm run build
 ```
 
 Starting a production server:
@@ -22,9 +22,17 @@ Starting a production server:
 NODE_ENV=production npm start
 ```
 
+
+## Setup dev
+
+Watch script changes for re building:
+```sh
+npm run watch:bundle
+```
+
 Starting a dev server:
 ```sh
-npm start
+npm run start:dev
 ```
 
 

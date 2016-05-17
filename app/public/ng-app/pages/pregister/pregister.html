@@ -1,0 +1,47 @@
+<div class="pb-pregister" layout="column" ng-cloak
+     layout-align="center stretch">
+  <md-content layout-padding>
+    <md-card>
+      <md-card-title>
+        <md-card-title-text>
+          <span class="md-headline">Register your account</span>
+        </md-card-title-text>
+      </md-card-title>
+
+      <md-card-content>
+        <form name="pbRegisterForm"
+              action="/auth/local/signup"
+              method="post">
+
+          <md-input-container class="md-block">
+            <label>Email</label>
+            <input required md-no-asterisk name="email" type="text"
+                   ng-model="registerForm.email">
+            <div ng-messages="pbRegisterForm.email.$error">
+              <div ng-message="required">This is required.</div>
+            </div>
+          </md-input-container>
+
+          <md-input-container class="md-block">
+            <label>Password</label>
+            <input required name="password" type="password"
+                   ng-model="registerForm.password">
+            <div ng-messages="pbRegisterForm.password.$error">
+              <div ng-message="required">This is required.</div>
+            </div>
+          </md-input-container>
+
+          <div class="">
+            <div class="">
+              <md-button type="submit" id="submit" value="Submit">
+                Register
+              </md-button>
+            </div>
+          </div>
+
+        </form>
+      </md-card-content>
+
+    </md-card>
+  </md-content>
+</div>

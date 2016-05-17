@@ -1,49 +1,64 @@
 {
-  "name": "pint-clone",
+  "name": "pinboard",
   "version": "1.0.0",
-  "engines": {
-    "node": "5.5.0",
-    "npm": "3.5.3"
-  },
-  "description": "Pinterest clone",
+  "description": "A pinterest clone built with Angular, Material, Node, Express, and Mongo",
   "main": "server.js",
   "scripts": {
-    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
-    "start:dev": "nodemon server.js",
-    "start:prod": "node server.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "./node_modules/bower/bin/bower install"
+    "build": "npm run build:bundle",
+    "watch:bundle": "watchify ./app/public/ng-app/app.js -o ./app/public/js/main.js -v",
+    "postinstall": "./node_modules/bower/bin/bower install",
+    "start": "node app/server.js",
+    "start:dev": "VERSION=DEV nodemon app/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/daniel-chung/fcc-dc-pinboard.git"
   },
   "keywords": [
-    "pinterest",
-    "react",
-    "javascript"
+    "Pinterest",
+    "Angular",
+    "Material",
+    "Design",
+    "Node",
+    "Express",
+    "Mongo",
+    "Mongoose",
+    "Javascript"
   ],
   "author": "daniel-chung",
   "license": "ISC",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/daniel-chung/fcc-dc-pinboard.git"
+  "bugs": {
+    "url": "https://github.com/daniel-chung/fcc-dc-pinboard/issues"
   },
+  "homepage": "https://github.com/daniel-chung/fcc-dc-pinboard#readme",
   "dependencies": {
-    "angular": "^1.5.3",
-    "angular-route": "^1.5.3",
-    "body-parser": "^1.15.0",
-    "bower": "^1.7.7",
-    "browserify": "^13.0.0",
+    "angular": "^1.5.5",
+    "angular-animate": "^1.5.5",
+    "angular-aria": "^1.5.5",
+    "angular-material": "^1.0.8",
+    "angular-messages": "^1.5.5",
+    "angular-mocks": "^1.5.5",
+    "angular-route": "^1.5.5",
+    "angular-sanitize": "^1.5.5",
+    "angular-ui-router": "^0.2.18",
+    "bcrypt": "^0.8.6",
+    "body-parser": "^1.15.1",
+    "bower": "^1.7.9",
     "cookie-parser": "^1.4.1",
-    "cors": "^2.7.1",
     "dotenv": "^2.0.0",
     "express": "^4.13.4",
     "express-session": "^1.13.0",
-    "gulp": "^3.9.1",
-    "if-env": "^1.0.0",
     "method-override": "^2.3.5",
-    "mongoose": "^4.4.10",
+    "mongoose": "^4.4.17",
     "morgan": "^1.7.0",
     "passport": "^0.3.2",
-    "passport-twitter": "^1.0.4",
-    "session": "^0.1.0",
-    "vinyl-source-stream": "^1.1.0"
+    "passport-local": "^1.0.0",
+    "passport-twitter": "^1.0.4"
+  },
+  "devDependencies": {
+    "browserify": "^13.0.1",
+    "watch": "^0.18.0",
+    "watchify": "^3.7.0"
   }
 }

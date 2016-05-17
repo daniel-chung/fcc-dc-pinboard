@@ -1,0 +1,96 @@
+/* /public/css/main.css */
+
+/* -----------------------------------------------------------------
+   Common
+   ----------------------------------------------------------------- */
+
+/* ng-click pointer */
+[ng-click],
+[data-ng-click],
+[x-ng-click] {
+  cursor: pointer;
+}
+
+body {
+  font-size: 14px;
+}
+
+a.pb-no-link {
+  color: white;
+  text-decoration: none;
+}
+a.pb-no-link:hover {
+  color: white;
+  text-decoration: none;
+  cursor:pointer;  
+}
+
+.pb-inline-block {
+  display: inline-block;
+}
+.pb-text-center {
+  text-align: center;
+}
+
+
+/* -----------------------------------------------------------------
+   pages / planding / planding.html
+   ----------------------------------------------------------------- */
+
+.pb-landing {
+  border: 1px solid red;
+}
+
+
+/* -----------------------------------------------------------------
+   pages / pshow / pshow.html
+   ----------------------------------------------------------------- */
+
+div.pb-pshow-content {
+  border: 1px solid #87CEFA;
+  margin: .5em;
+  padding: .5em;
+}
+div.pb-pshow-img-div {
+  border: 1px solid #ff9999;
+  display: inline-block;
+  margin: .5em;
+  padding: .5em;
+}
+img.pb-pshow-img {
+  width: 10em;
+}
+
+
+/* -----------------------------------------------------------------
+   components / showpins / showpins.html
+   ----------------------------------------------------------------- */
+
+div.pb-showpins-content {
+  border: 1px solid #87CEFA;
+  margin: .5em;
+  padding: .5em;
+}
+div.pb-showpins-img-div {
+  border: 1px solid #ff9999;
+  display: inline-block;
+  margin: .5em;
+  padding: .5em;
+}
+img.pb-showpins-img {
+  width: 10em;
+}
+
+
+/* -----------------------------------------------------------------
+   components / navigator / navigator.html
+   ----------------------------------------------------------------- */
+
+.pd-navigator-auth-btn {
+  color: #fff;
+}
+
+.pb-navigator-auth-item1 {
+  margin: -10px 0 0 0;
+}
+

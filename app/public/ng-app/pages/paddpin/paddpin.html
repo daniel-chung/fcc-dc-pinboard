@@ -1,0 +1,46 @@
+<div class="pb-addpin" layout="column" ng-cloak
+     layout-align="center stretch">
+  <md-content layout-padding>
+    <md-card>
+      <md-card-title>
+        <md-card-title-text>
+          <span class="md-headline">Add a new pin</span>
+        </md-card-title-text>
+      </md-card-title>
+
+      <md-card-content>
+        <form name="pbPinaddForm"
+              ng-submit="paddpinCtrl.pinadd(pbPinaddForm)">
+
+          <md-input-container class="md-block">
+            <label>Pin name</label>
+            <input required md-no-asterisk name="pinname"
+                   ng-model="paddpinCtrl.pinaddForm.pinname">
+            <div ng-messages="pb-pinadd-form.pinname.$error">
+              <div ng-message="required">This is required.</div>
+            </div>
+          </md-input-container>
+
+          <md-input-container class="md-block">
+            <label>Pin url</label>
+            <input required name="url"
+                   ng-model="paddpinCtrl.pinaddForm.url">
+            <div ng-messages="pb-pinadd-form.url.$error">
+              <div ng-message="required">This is required.</div>
+            </div>
+          </md-input-container>
+
+          <div class="">
+            <div class="">
+              <md-button type="submit" id="submit" value="Submit">
+                Add pin
+              </md-button>
+            </div>
+          </div>
+
+        </form>
+      </md-card-content>
+
+    </md-card>
+  </md-content>
+</div>
