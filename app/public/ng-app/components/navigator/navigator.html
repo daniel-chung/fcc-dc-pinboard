@@ -23,13 +23,15 @@
       </md-button>
 
       <!-- 5. Authentication -->
-      <md-menu-bar layout="row" ng-if="navigatorCtrl.loggedIn === false">
-        <md-menu md-offset="0 12">
+      <md-menu-bar ng-if="navigatorCtrl.loggedIn === false"
+                   class="pd-navigator-menu-height">
+        <md-menu class="pd-navigator-menu-height">
 
           <!-- 5.a Open up the menu -->
-          <button ng-click="$mdOpenMenu()" class="pd-navigator-auth-btn">
+          <button ng-click="$mdOpenMenu()"
+                  class="pd-navigator-auth-btn pd-navigator-menu-height">
             Sign in / Join
-            <md-icon md-svg-icon="images/ic_arrow_drop_down_white_24px.svg" />
+            <i class="material-icons md-white">arrow_drop_down</i>
           </button>
 
           <!-- 5.b Menu contents -->
@@ -50,6 +52,7 @@
             <!-- 5.b.3 Email login -->
             <div layout="column" ng-cloak>
               <md-content layout-padding>
+
               <form name="localLogInForm" action="/auth/local/login"
                     method="post">
                 <div class="pb-text-center">Sign in with E-mail</div>
@@ -81,6 +84,7 @@
                 </div>
 
               </form>
+
               </md-content>
             </div>
 
@@ -96,11 +100,16 @@
               </div>
             </md-menu-item>
 
-
           </md-menu-content>
         </md-menu>
 
       </md-menu-bar>
+
+      <!-- 6. (hidden) Sign out -->
+      <md-button href="/auth/logout" ng-if="navigatorCtrl.loggedIn === true">
+        Sign out
+      </md-button>
+
     </div>
   </md-toolbar>
 </div>

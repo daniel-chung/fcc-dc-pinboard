@@ -372,17 +372,22 @@ module.exports = angular
 // /app/public/ng-app/pages/pshow/pshow-controller.js
 'use strict';
 
-var pShowCtrl = function(Fetchpins, pinOwners) {
+var pShowCtrl = function(Fetchpins, pinOwners, $http, $state) {
+
+  this.http_ = $http;
+  this.state_ = $state;
+
+  this.owners_ = pinOwners;
 
   this.title_ = '';
-  if (pinOwners === 'self') {
+  if (this.owners_ === 'self') {
     this.title_ = 'My pins';
   }
-  else if (pinOwners === 'all') {
+  else if (this.owners_ === 'all') {
     this.title_ = 'All pins';
   }
   else {
-    this.title_ = 'Pins by: ' + pinOwners;
+    this.title_ = 'Pins by: ' + this.owners_;
   }
 
   // Fetchpins service
@@ -392,7 +397,7 @@ var pShowCtrl = function(Fetchpins, pinOwners) {
   this.pins_;
 
   // Connect to api
-  this.getPins(pinOwners);
+  this.getPins(this.owners_);
 }
 
 
@@ -411,6 +416,21 @@ pShowCtrl.prototype.errorCallback = function(response) {
   console.log(response.status);
 };
 
+pShowCtrl.prototype.delete = function(id) {
+  console.log('deleting', id);
+
+  var deleteUrl = '/api/pindelete/' + id;
+  this.http_.delete(deleteUrl).then(
+    (function(res) {
+      this.state_.reload();
+    }).bind(this),
+    (function(err) {
+      console.log('error callback', err);
+      this.state_.reload();
+    }).bind(this)
+  );
+
+}
 
 module.exports = pShowCtrl;
 

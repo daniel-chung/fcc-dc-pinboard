@@ -5,9 +5,16 @@
     
     <div class="pb-pshow-img-div"
          ng-repeat="pin in pshowCtrl.pins_ track by pin._id">
+
+      <div class="pb-pshow-img-clear"
+           ng-click="pshowCtrl.delete(pin._id)"
+           ng-if="pshowCtrl.owners_==='self'">
+        <i class="material-icons md-white">clear</i>
+      </div>
+
       
       <img ng-src="{{pin.url}}" alt="pin image" class="pb-pshow-img"
-           onError="this.onerror=null;this.src='/images/errImg.png';">
+           onError="this.onerror=null;this.src='/images/errImg.png';" />
       <br>
 
       {{pin.pinname}}

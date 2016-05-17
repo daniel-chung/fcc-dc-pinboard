@@ -4,6 +4,49 @@
    Common
    ----------------------------------------------------------------- */
 
+.test {
+  border: 1px solid red;
+}
+
+
+/* Material Icons */
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Material Icons'),
+       local('MaterialIcons-Regular'),
+       url(./icons/MaterialIcons-Regular.woff2) format('woff2')
+}
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;  /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+}
+
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-white { color: #fff; }
+
+
 /* ng-click pointer */
 [ng-click],
 [data-ng-click],
@@ -69,17 +112,49 @@ a.pb-pshow-user:hover {
   text-decoration: underline;
 }
 
+div.pb-pshow-img-clear {
+  /*display: none;*/
+  position: absolute;
+  color: #fff;
+}
+
+.pb-pshow-img-clear {
+  background-color: #777;
+  display: none;
+}
+.pb-pshow-img-div:hover .pb-pshow-img-clear {
+  display: inline;
+}
+
 
 /* -----------------------------------------------------------------
    components / navigator / navigator.html
    ----------------------------------------------------------------- */
 
+.pd-navigator-menu-height,
+md-menu.pd-navigator-menu-height {
+  height: 100%;
+}
+
 .pd-navigator-auth-btn {
   color: #fff;
 }
+.pd-navigator-auth-btn i {
+  vertical-align: middle;
+}
 
 .pb-navigator-auth-item1 {
-  margin: -10px 0 0 0;
+  /*margin: -10px 0 0 0;*/
+}
+
+md-toolbar,
+div.pb-navigator {
+  max-height: 48px;
+}
+
+md-menu-content {
+  position: relative;
+  
 }
 
 .md-toolbar-tools a {

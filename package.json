@@ -48,6 +48,7 @@
     "dotenv": "^2.0.0",
     "express": "^4.13.4",
     "express-session": "^1.13.0",
+    "material-design-icons": "^2.2.3",
     "method-override": "^2.3.5",
     "mongoose": "^4.4.17",
     "morgan": "^1.7.0",
