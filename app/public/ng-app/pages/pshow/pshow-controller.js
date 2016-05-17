@@ -46,8 +46,6 @@ pShowCtrl.prototype.errorCallback = function(response) {
 };
 
 pShowCtrl.prototype.delete = function(id) {
-  console.log('deleting', id);
-
   var deleteUrl = '/api/pindelete/' + id;
   this.http_.delete(deleteUrl).then(
     (function(res) {
@@ -58,7 +56,6 @@ pShowCtrl.prototype.delete = function(id) {
       this.state_.reload();
     }).bind(this)
   );
-
 }
 
 module.exports = pShowCtrl;

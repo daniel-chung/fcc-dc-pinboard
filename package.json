@@ -32,6 +32,20 @@
   },
   "homepage": "https://github.com/daniel-chung/fcc-dc-pinboard#readme",
   "dependencies": {
+    "bcrypt": "^0.8.6",
+    "body-parser": "^1.15.1",
+    "cookie-parser": "^1.4.1",
+    "dotenv": "^2.0.0",
+    "express": "^4.13.4",
+    "express-session": "^1.13.0",
+    "method-override": "^2.3.5",
+    "mongoose": "^4.4.17",
+    "morgan": "^1.7.0",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+    "passport-twitter": "^1.0.4"
+  },
+  "devDependencies": {
     "angular": "^1.5.5",
     "angular-animate": "^1.5.5",
     "angular-aria": "^1.5.5",
@@ -41,23 +55,8 @@
     "angular-route": "^1.5.5",
     "angular-sanitize": "^1.5.5",
     "angular-ui-router": "^0.2.18",
-    "bcrypt": "^0.8.6",
-    "body-parser": "^1.15.1",
-    "bower": "^1.7.9",
-    "cookie-parser": "^1.4.1",
-    "dotenv": "^2.0.0",
-    "express": "^4.13.4",
-    "express-session": "^1.13.0",
-    "material-design-icons": "^2.2.3",
-    "method-override": "^2.3.5",
-    "mongoose": "^4.4.17",
-    "morgan": "^1.7.0",
-    "passport": "^0.3.2",
-    "passport-local": "^1.0.0",
-    "passport-twitter": "^1.0.4"
-  },
-  "devDependencies": {
     "browserify": "^13.0.1",
+    "material-design-icons": "^2.2.3",
     "watch": "^0.18.0",
     "watchify": "^3.7.0"
   }
