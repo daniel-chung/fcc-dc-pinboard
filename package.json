@@ -6,7 +6,6 @@
   "scripts": {
     "build": "npm run build:bundle",
     "watch:bundle": "watchify ./app/public/ng-app/app.js -o ./app/public/js/main.js -v",
-    "postinstall": "./node_modules/bower/bin/bower install",
     "start": "node app/server.js",
     "start:dev": "VERSION=DEV nodemon app/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
