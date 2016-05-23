@@ -13,6 +13,16 @@ FetchpinsService.prototype.getPins = function(filter) {
   return this._http.get(apiUrl);
 };
 
+FetchpinsService.prototype.deletePin = function(id) {
+  var apiUrl = '/api/pindelete/' + id;
+  return this._http.delete(apiUrl);
+};
+
+FetchpinsService.prototype.likePin = function(id) {
+  var apiUrl = '/api/like';
+  return this._http.post(apiUrl, {pinId: id});
+};
+
 
 module.exports = FetchpinsService;
 

@@ -42,6 +42,7 @@ var PassportConfig = function(passport) {
           newUser.twitter.token = token;
           newUser.twitter.username = profile.username;
           newUser.twitter.displayName = profile.displayName;
+          newUser.likes = [];
           newUser.save(function(err) {
             if (err)
               throw err;
@@ -76,6 +77,7 @@ var PassportConfig = function(passport) {
           newUser.local.email = email;
           newUser.local.username = /^\w+@/.exec(email)[0];
           newUser.local.password = newUser.generateHash(password);
+          newUser.likes = [];
           newUser.save(function(err) {
             if (err)
               throw err;

@@ -7,10 +7,11 @@ var mongoose = require('mongoose');
 
 // Define Books model schema ---------------------------------------------------
 var pinsSchema = mongoose.Schema({
-  pinname   : String,
-  thumbnail : String,
-  url       : String,
-  username  : String
+  pinname    : String,
+  thumbnail  : String,
+  url        : String,
+  username   : String,
+  likescount : Number
 });
 
 

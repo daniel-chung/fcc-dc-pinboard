@@ -8,7 +8,6 @@
   border: 1px solid red;
 }
 
-
 /* Material Icons */
 @font-face {
   font-family: 'Material Icons';
@@ -43,8 +42,10 @@
   font-feature-settings: 'liga';
 }
 
+.material-icons.md-14 { font-size: 14px; }
 .material-icons.md-18 { font-size: 18px; }
 .material-icons.md-white { color: #fff; }
+.material-icons.md-grey { color: #777; }
 
 
 /* ng-click pointer */
@@ -75,13 +76,35 @@ a.pb-no-link:hover {
   text-align: center;
 }
 
+.pb-margin-top {
+  margin-top: 1em
+}
+.pb-margin-left {
+  margin-left: 1em
+}
+
+.pb-hr {
+  border-top: .5px solid #CCC;
+  margin: 1em 0;
+}
+
+
+/* -----------------------------------------------------------------
+   Grid layout view
+   ----------------------------------------------------------------- */
+.container {
+  border: 1px solid blue;
+  width: 16em;
+  float: left;
+}
+
 
 /* -----------------------------------------------------------------
    pages / planding / planding.html
    ----------------------------------------------------------------- */
 
 .pb-landing {
-  border: 1px solid red;
+  border: 1px solid blue;
 }
 
 
@@ -89,20 +112,30 @@ a.pb-no-link:hover {
    pages / pshow / pshow.html
    ----------------------------------------------------------------- */
 
-div.pb-pshow-content {
+.pb-pshow {
+  text-align: center; 
+}
+
+.pb-pshow-title {
+  margin: 2em 0 0 2em;
+  text-align: left;
+}
+
+.pb-pshow-content {
   /*border: 1px solid #87CEFA;*/
   margin: .5em;
   padding: .5em;
+  display: inline-block;
+  text-align: left;
 }
-div.pb-pshow-img-div {
+.pb-pshow-img-div {
   /*border: 1px solid #ff9999;*/
   display: inline-block;
+  float: left;
   margin: .5em;
-  padding: .5em;
+  width: 15em;
 }
-img.pb-pshow-img {
-  width: 10em;
-}
+
 a.pb-pshow-user {
   color: #555;
   font-weight: 500;
@@ -143,8 +176,11 @@ md-menu.pd-navigator-menu-height {
   vertical-align: middle;
 }
 
-.pb-navigator-auth-item1 {
-  /*margin: -10px 0 0 0;*/
+.pb-navigator-margin-top {
+  margin: -10px 0 0 0;
+}
+.pb-navigator-margin-top-15 {
+  margin: -15px 0 0 0;
 }
 
 md-toolbar,
@@ -154,7 +190,6 @@ div.pb-navigator {
 
 md-menu-content {
   position: relative;
-  
 }
 
 .md-toolbar-tools a {

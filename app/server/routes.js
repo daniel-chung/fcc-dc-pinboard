@@ -63,6 +63,9 @@ var ExpressRoutes = function(app, passport) {
 
   app.route('/api/pindelete/:pinid')
     .delete(pinsService.deletepin);
+
+  app.route('/api/like')
+    .post(pinsService.likePin);
 }
 
 

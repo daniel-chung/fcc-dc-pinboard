@@ -42,6 +42,7 @@ var Application = angular.module('pb.application', [
 
 // Provide authentication checks on state change
 Application.run(function ($rootScope, $state, $http, $q) {
+
   $rootScope.$on('$stateChangeStart', 
     function (event, toState, toParams, fromState, fromParams, options) {
 

@@ -1,31 +1,48 @@
-<div class="pb-show">
+<div class="pb-pshow">
+
+  <h1 class="pb-pshow-title">{{pshowCtrl.title_}}</h1>
 
   <div class="pb-pshow-content">
-    <h1>{{pshowCtrl.title_}}</h1>
-    
-    <div class="pb-pshow-img-div"
-         ng-repeat="pin in pshowCtrl.pins_ track by pin._id">
 
-      <div class="pb-pshow-img-clear"
-           ng-click="pshowCtrl.delete(pin._id)"
-           ng-if="pshowCtrl.owners_==='self'">
-        <i class="material-icons md-white">clear</i>
-      </div>
+    <div class="container" ng-repeat='key in pshowCtrl.pins_ track by $index'>
 
-      
-      <img ng-src="{{pin.url}}" alt="pin image" class="pb-pshow-img"
-           onError="this.onerror=null;this.src='/images/errImg.png';" />
-      <br>
+      <md-card class="pb-pshow-img-div pb-pshow-img"
+               ng-repeat="pin in pshowCtrl.pins_[$index] track by pin._id">
 
-      {{pin.pinname}}
-      <br>
-      
-      <a ui-sref="pshow.username({username: pin.username})"
-         class="pb-pshow-user">
-        {{pin.username}}
-      </a>
+        <div class="pb-pshow-img-clear"
+             ng-click="pshowCtrl.delete(pin._id)"
+             ng-if="pshowCtrl.owners_==='self'">
+          <i class="material-icons md-white">clear</i>
+        </div>
+
+        <a ng-href="{{pin.url}}" target="_blank">
+          <img ng-src="{{pin.url}}" alt="pin image"
+               onError="this.onerror=null;this.src='/images/errImg.png';" />
+        </a>
+
+        <div class="pb-margin-top"></div>
+        <span class="md-caption pb-margin-left">{{pin.pinname}}</span>
+
+        <div class="pb-hr"></div>
+        <a ui-sref="pshow.username({username: pin.username})"
+           class="pb-pshow-user pb-margin-left md-caption">
+          {{pin.username}}
+        </a>
+
+        <div class="pb-hr"></div>
+        <div>
+          <md-button class="md-icon-button" aria-label="Favorite"
+                     ng-click="pshowCtrl.like(pin._id)">
+            <i class="material-icons md-grey md-14">favorite</i>
+            {{pin.likescount}}
+          </md-button>
+        </div>
+
+      </md-card>
 
     </div>
+
+
   </div>
 
 </div>

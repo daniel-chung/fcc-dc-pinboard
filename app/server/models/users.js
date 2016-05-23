@@ -9,16 +9,17 @@ var bcrypt = require('bcrypt');
 // Define Books model schema ---------------------------------------------------
 var usersSchema = mongoose.Schema({
   twitter: {
-    id: String,
-    token: String,
-    username: String,
-    displayName: String
+    id          : String,
+    token       : String,
+    username    : String,
+    displayName : String
   },
   local: {
-    email: String,
-    password: String,
-    username: String
-  }
+    email    : String,
+    password : String,
+    username : String
+  },
+  likes: [mongoose.Schema.ObjectId]
 });
 
 
