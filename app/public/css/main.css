@@ -162,6 +162,7 @@ a.pb-pshow-user:hover {
 div.pb-pshow-img-clear {
   /*display: none;*/
   position: absolute;
+  padding: .25em;
   color: #fff;
 }
 
