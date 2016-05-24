@@ -108,8 +108,6 @@ function PinsServices () {
     var userId = req.user._id;
     var pinId = req.body.pinId;
 
-
-
     Users.find(
       { '_id': userId, 'likes': pinId },
       function(err, user) {
@@ -125,7 +123,6 @@ function PinsServices () {
         else {
           removeLike(userId, pinId, res);
         }
-
       }
     );
 
@@ -144,8 +141,8 @@ function addLike(userId, pinId, res) {
     function (err, user) {
       if (err)
         throw err;
-      console.log('addLike user', user);
-
+      if (!user)
+        throw err;
       Pins.findByIdAndUpdate(
         pinId,
         { $inc: { likescount: 1 } },
@@ -164,8 +161,8 @@ function removeLike(userId, pinId, res) {
     function (err, user) {
       if (err)
         throw err;
-      console.log('addLike user', user);
-
+      if (!user)
+        throw err;
       Pins.findByIdAndUpdate(
         pinId,
         { $inc: { likescount: -1 } },
@@ -176,59 +173,6 @@ function removeLike(userId, pinId, res) {
         });
     });
 };
-
-
-/*
-    Users.find(
-      {"likes": pinId},
-      function(err, like) {
-        console.log('err', err); //throw err;
-        console.log('like', like);
-
-
-        if (err)
-          console.log('err', err); //throw err;
-          //res.send({'error': err});
-        if (like === []) {
-          console.log('found', like);
-          //res.send({'error': err});
-        }
-
-
-        else {
-          console.log('creating a new like')
-
-          Users.findByIdAndUpdate(
-            userId,
-            { $push: { likes: pinId } },
-            function (err, user) {
-              if (err)
-                throw err;
-              if (user) {
-                console.log('has user', user);
-              }
-
-              Pins.findByIdAndUpdate(
-                pinId,
-                { $inc: { likescount: 1 } },
-                function (err, pins) {
-                  if (err)
-                    throw err;
-                  res.end();
-                }
-              );
-
-
-            }
-          );
-
-        }
-      }
-    );
-
-
-*/
-
 
 
 

@@ -56,7 +56,6 @@
     "angular-sanitize": "^1.5.5",
     "angular-ui-router": "^0.3.0",
     "browserify": "^13.0.1",
-    "material-design-icons": "^2.2.3",
     "watchify": "^3.7.0"
   }
 }

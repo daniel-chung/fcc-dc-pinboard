@@ -48,6 +48,7 @@
 .material-icons.md-grey { color: #777; }
 
 
+
 /* ng-click pointer */
 [ng-click],
 [data-ng-click],
@@ -57,6 +58,15 @@
 
 body {
   font-size: 14px;
+}
+
+body,
+div#main {
+  background-color: #EEE;
+}
+
+div#main {
+  min-height: 100vh;
 }
 
 a.pb-no-link {
@@ -89,11 +99,15 @@ a.pb-no-link:hover {
 }
 
 
+/* Extending Font Awesome */
+.pb-fa-grey { color: #777; }
+
+
+
 /* -----------------------------------------------------------------
    Grid layout view
    ----------------------------------------------------------------- */
 .container {
-  border: 1px solid blue;
   width: 16em;
   float: left;
 }
@@ -174,6 +188,7 @@ md-menu.pd-navigator-menu-height {
 }
 .pd-navigator-auth-btn i {
   vertical-align: middle;
+  margin-top: -8px;
 }
 
 .pb-navigator-margin-top {
@@ -197,4 +212,12 @@ md-menu-content {
   text-decoration: none;
 }
 
+
+/* -----------------------------------------------------------------
+   components / footer / footer.html
+   ----------------------------------------------------------------- */
+
+div.pb-footer-content {
+  margin-right: 3em;
+}
 

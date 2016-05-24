@@ -19,6 +19,7 @@ var pRegister = require('./pages/pregister');
 
 // Components
 var navigator = require('./components/navigator');
+var footer    = require('./components/footer');
 
 // Services
 var sFetchpins = require('./services/fetchpins');
@@ -37,6 +38,7 @@ var Application = angular.module('pb.application', [
     pAddpin.name,
     pRegister.name,
     navigator.name,
+    footer.name,
     sFetchpins.name
 ]);
 
@@ -161,7 +163,52 @@ Application.config(function ($stateProvider, $urlRouterProvider) {
 
 // EOF -------------------------------------------------------------------------
 
-},{"./components/navigator":2,"./pages/paddpin":5,"./pages/planding":7,"./pages/pregister":9,"./pages/pshow":11,"./services/fetchpins":14,"angular":25,"angular-animate":16,"angular-aria":18,"angular-material":20,"angular-messages":22,"angular-ui-router":23}],2:[function(require,module,exports){
+},{"./components/footer":4,"./components/navigator":5,"./pages/paddpin":8,"./pages/planding":10,"./pages/pregister":12,"./pages/pshow":14,"./services/fetchpins":17,"angular":28,"angular-animate":19,"angular-aria":21,"angular-material":23,"angular-messages":25,"angular-ui-router":26}],2:[function(require,module,exports){
+// /app/public/ng-app/components/footer/footer-controller.js
+'use strict';
+
+var footerController = function() {
+};
+
+
+module.exports = footerController;
+
+
+// EOF -------------------------------------------------------------------------
+
+},{}],3:[function(require,module,exports){
+// /app/public/ng-app/components/footer/footer-directive.js
+'use strict';
+
+module.exports = function () {
+  return {
+    restrict: 'E',
+    templateUrl: 'ng-app/components/footer/footer.html',
+    controller: 'pb.footer.footerCtrl',
+    controllerAs: 'footerCtrl'
+  };
+};
+
+
+// EOF -------------------------------------------------------------------------
+
+},{}],4:[function(require,module,exports){
+// /app/public/ng-app/components/footer/index.js
+'use strict';
+
+var footerDirective  = require('./footer-directive');
+var footerController = require('./footer-controller');
+
+
+module.exports = angular
+  .module('pb.footer', [])
+  .directive('pbFooter', footerDirective)
+  .controller('pb.footer.footerCtrl', footerController);
+
+
+// EOF -------------------------------------------------------------------------
+
+},{"./footer-controller":2,"./footer-directive":3}],5:[function(require,module,exports){
 // /app/public/ng-app/components/navigator/index.js
 'use strict';
 
@@ -177,7 +224,7 @@ module.exports = angular
 
 // EOF -------------------------------------------------------------------------
 
-},{"./navigator-controller":3,"./navigator-directive":4}],3:[function(require,module,exports){
+},{"./navigator-controller":6,"./navigator-directive":7}],6:[function(require,module,exports){
 // /app/public/ng-app/components/navigator/navigator-controller.js
 'use strict';
 
@@ -226,7 +273,7 @@ module.exports = navigatorController;
 
 // EOF -------------------------------------------------------------------------
 
-},{}],4:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 // /app/public/ng-app/components/navigator/navigator-directive.js
 'use strict';
 
@@ -242,7 +289,7 @@ module.exports = function () {
 
 // EOF -------------------------------------------------------------------------
 
-},{}],5:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 // /app/public/ng-app/pages/paddpin/index.js
 'use strict';
 
@@ -256,7 +303,7 @@ module.exports = angular
 
 // EOF -------------------------------------------------------------------------
 
-},{"./paddpin-controller":6}],6:[function(require,module,exports){
+},{"./paddpin-controller":9}],9:[function(require,module,exports){
 // /app/public/ng-app/pages/paddpin/paddpin-controller.js
 'use strict';
 
@@ -301,7 +348,7 @@ module.exports = pAddpinCtrl;
 
 // EOF -------------------------------------------------------------------------
 
-},{}],7:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 // /app/public/ng-app/pages/planding/index.js
 'use strict';
 
@@ -315,7 +362,7 @@ module.exports = angular
 
 // EOF -------------------------------------------------------------------------
 
-},{"./planding-controller":8}],8:[function(require,module,exports){
+},{"./planding-controller":11}],11:[function(require,module,exports){
 // /app/public/ng-app/pages/planding/planding-controller.js
 'use strict';
 
@@ -329,7 +376,7 @@ module.exports = pLandingCtrl;
 
 // EOF -------------------------------------------------------------------------
 
-},{}],9:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 // /app/public/ng-app/pages/pregister/index.js
 'use strict';
 
@@ -343,7 +390,7 @@ module.exports = angular
 
 // EOF -------------------------------------------------------------------------
 
-},{"./pregister-controller":10}],10:[function(require,module,exports){
+},{"./pregister-controller":13}],13:[function(require,module,exports){
 // /app/public/ng-app/pages/pregister/pregister-controller.js
 'use strict';
 
@@ -355,7 +402,7 @@ module.exports = pRegisterCtrl;
 
 // EOF -------------------------------------------------------------------------
 
-},{}],11:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 // /app/public/ng-app/pages/pshow/index.js
 'use strict';
 
@@ -369,7 +416,7 @@ module.exports = angular
 
 // EOF -------------------------------------------------------------------------
 
-},{"./pshow-controller":12}],12:[function(require,module,exports){
+},{"./pshow-controller":15}],15:[function(require,module,exports){
 // /app/public/ng-app/pages/pshow/pshow-controller.js
 'use strict';
 
@@ -505,7 +552,7 @@ module.exports = pShowCtrl;
 
 // EOF -------------------------------------------------------------------------
 
-},{}],13:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 // /app/public/ng-app/services/fetchpins/fetchpins-service.js
 'use strict';
 
@@ -537,7 +584,7 @@ module.exports = FetchpinsService;
 
 // EOF -------------------------------------------------------------------------
 
-},{}],14:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 // /app/public/ng-app/services/fetchpins/index.js
 'use strict';
 
@@ -551,7 +598,7 @@ module.exports = angular
 
 // EOF -------------------------------------------------------------------------
 
-},{"./fetchpins-service":13}],15:[function(require,module,exports){
+},{"./fetchpins-service":16}],18:[function(require,module,exports){
 /**
  * @license AngularJS v1.5.5
  * (c) 2010-2016 Google, Inc. http://angularjs.org
@@ -4700,11 +4747,11 @@ angular.module('ngAnimate', [])
 
 })(window, window.angular);
 
-},{}],16:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 require('./angular-animate');
 module.exports = 'ngAnimate';
 
-},{"./angular-animate":15}],17:[function(require,module,exports){
+},{"./angular-animate":18}],20:[function(require,module,exports){
 /**
  * @license AngularJS v1.5.5
  * (c) 2010-2016 Google, Inc. http://angularjs.org
@@ -5111,11 +5158,11 @@ ngAriaModule.directive('ngShow', ['$aria', function($aria) {
 
 })(window, window.angular);
 
-},{}],18:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 require('./angular-aria');
 module.exports = 'ngAria';
 
-},{"./angular-aria":17}],19:[function(require,module,exports){
+},{"./angular-aria":20}],22:[function(require,module,exports){
 /*!
  * Angular Material Design
  * https://github.com/angular/material
@@ -30074,7 +30121,7 @@ angular.module("material.core").constant("$MD_THEME_CSS", "/*  Only used with Th
 
 
 })(window, window.angular);;window.ngMaterial={version:{full: "1.0.8"}};
-},{}],20:[function(require,module,exports){
+},{}],23:[function(require,module,exports){
 // Should already be required, here for clarity
 require('angular');
 
@@ -30088,7 +30135,7 @@ require('./angular-material');
 // Export namespace
 module.exports = 'ngMaterial';
 
-},{"./angular-material":19,"angular":25,"angular-animate":16,"angular-aria":18}],21:[function(require,module,exports){
+},{"./angular-material":22,"angular":28,"angular-animate":19,"angular-aria":21}],24:[function(require,module,exports){
 /**
  * @license AngularJS v1.5.5
  * (c) 2010-2016 Google, Inc. http://angularjs.org
@@ -30812,11 +30859,11 @@ function ngMessageDirectiveFactory() {
 
 })(window, window.angular);
 
-},{}],22:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 require('./angular-messages');
 module.exports = 'ngMessages';
 
-},{"./angular-messages":21}],23:[function(require,module,exports){
+},{"./angular-messages":24}],26:[function(require,module,exports){
 /**
  * State-based routing for AngularJS
  * @version v0.3.0
@@ -35392,7 +35439,7 @@ angular.module('ui.router.state')
   .filter('isState', $IsStateFilter)
   .filter('includedByState', $IncludedByStateFilter);
 })(window, window.angular);
-},{}],24:[function(require,module,exports){
+},{}],27:[function(require,module,exports){
 /**
  * @license AngularJS v1.5.5
  * (c) 2010-2016 Google, Inc. http://angularjs.org
@@ -66261,8 +66308,8 @@ $provide.value("$locale", {
 })(window);
 
 !window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
-},{}],25:[function(require,module,exports){
+},{}],28:[function(require,module,exports){
 require('./angular');
 module.exports = angular;
 
-},{"./angular":24}]},{},[1]);
+},{"./angular":27}]},{},[1]);
