@@ -8,47 +8,6 @@
   border: 1px solid red;
 }
 
-/* Material Icons */
-@font-face {
-  font-family: 'Material Icons';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Material Icons'),
-       local('MaterialIcons-Regular'),
-       url(./icons/MaterialIcons-Regular.woff2) format('woff2')
-}
-.material-icons {
-  font-family: 'Material Icons';
-  font-weight: normal;
-  font-style: normal;
-  font-size: 24px;  /* Preferred icon size */
-  display: inline-block;
-  line-height: 1;
-  text-transform: none;
-  letter-spacing: normal;
-  word-wrap: normal;
-  white-space: nowrap;
-  direction: ltr;
-
-  /* Support for all WebKit browsers. */
-  -webkit-font-smoothing: antialiased;
-  /* Support for Safari and Chrome. */
-  text-rendering: optimizeLegibility;
-
-  /* Support for Firefox. */
-  -moz-osx-font-smoothing: grayscale;
-
-  /* Support for IE. */
-  font-feature-settings: 'liga';
-}
-
-.material-icons.md-14 { font-size: 14px; }
-.material-icons.md-18 { font-size: 18px; }
-.material-icons.md-white { color: #fff; }
-.material-icons.md-grey { color: #777; }
-
-
-
 /* ng-click pointer */
 [ng-click],
 [data-ng-click],
@@ -185,6 +144,15 @@ div.pb-pshow-img-clear {
 md-menu.pd-navigator-menu-height {
   height: 100%;
 }
+
+md-menu-bar.md-default-theme md-menu.md-open > button,
+md-menu-bar md-menu.md-open > button,
+md-menu-bar.md-default-theme md-menu > button:focus,
+md-menu-bar md-menu > button:focus {
+  background-color: #42A5F5;
+}
+
+
 
 .pd-navigator-auth-btn {
   color: #fff;

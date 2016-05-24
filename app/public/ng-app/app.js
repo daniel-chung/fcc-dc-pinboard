@@ -81,6 +81,20 @@ Application.run(function ($rootScope, $state, $http, $q) {
 });
 
 
+// Define Angular Material theming ---------------------------------------------
+Application.config(function($mdThemingProvider) {
+  $mdThemingProvider.theme('default')
+    .primaryPalette('blue', {
+      'default': '500',
+      'hue-1': '100',
+      'hue-2': '200'
+    })
+    .accentPalette('purple', {
+      'default': 'A200'
+    });
+});
+
+
 // Define Routing --------------------------------------------------------------
 Application.config(function ($stateProvider, $urlRouterProvider) {
 
