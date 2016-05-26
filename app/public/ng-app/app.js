@@ -16,8 +16,9 @@ var pAddpin   = require('./pages/paddpin');
 var pRegister = require('./pages/pregister');
 
 // Components
-var navigator = require('./components/navigator');
-var footer    = require('./components/footer');
+var navigator     = require('./components/navigator');
+var navigatormenu = require('./components/navigatormenu');
+var footer        = require('./components/footer');
 
 // Services
 var sFetchpins = require('./services/fetchpins');
@@ -35,6 +36,7 @@ var Application = angular.module('pb.application', [
     pAddpin.name,
     pRegister.name,
     navigator.name,
+    navigatormenu.name,
     footer.name,
     sFetchpins.name
 ]);

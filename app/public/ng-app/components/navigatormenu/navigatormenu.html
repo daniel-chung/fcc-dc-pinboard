@@ -1,0 +1,82 @@
+<md-menu-bar ng-if="navigatorCtrl.loggedIn === false"
+             class="pd-navigator-menu-height">
+  <md-menu class="pd-navigator-menu-height">
+
+    <!-- Open up the menu -->
+    <button ng-click="$mdOpenMenu()"
+            class="pd-navigator-auth-btn pd-navigator-menu-height">
+      Sign in / Join&nbsp;
+      <i class="fa fa-sort-desc fa-lg" aria-hidden="true"></i>
+    </button>
+
+    <!-- Menu contents -->
+    <md-menu-content width="4" >
+
+      <!-- 1 Twitter login -->
+      <md-menu-item >
+        <div class="pb-navigator-margin-top">
+          <md-button href="/auth/twitter"
+                     class="md-raised md-primary md-hue-1">
+            Sign in with twitter
+          </md-button>
+        </div>
+      </md-menu-item>
+
+      <!-- Divider -->
+      <md-menu-divider></md-menu-divider>
+
+      <!-- 2 Email login -->
+      <div layout="column" ng-cloak>
+        <md-content layout-padding>
+
+        <form name="localLogInForm" action="/auth/local/login"
+              method="post">
+          <div class="pb-text-center">Sign in with E-mail</div>
+
+          <md-input-container class="md-block">
+            <label>E-mail</label>
+            <input required name="email" type="text"
+                   ng-model="local.email">
+            <div ng-messages="localLogInForm.email.$error">
+              <div ng-message="required">This is required.</div>
+            </div>
+          </md-input-container>
+
+          <md-input-container class="md-block">
+            <label>Password</label>
+            <input required name="password" type="password"
+                   ng-model="local.password">
+            <div ng-messages="localLogInForm.password.$error">
+              <div ng-message="required">This is required.</div>
+            </div>
+          </md-input-container>
+
+          <div class="pb-text-center pb-navigator-margin-top-15"
+               layout="column" layout-align="center stretch">
+            <md-button type="submit" id="submit" value="Submit"
+                       class="md-raised md-primary md-hue-1">
+              Sign in
+            </md-button>
+          </div>
+
+        </form>
+
+        </md-content>
+      </div>
+
+      <!-- Divider -->
+      <md-menu-divider></md-menu-divider>
+
+      <!-- 3 Register -->
+      <md-menu-item >
+        <div class="pb-navigator-auth-item1">
+          <md-button ui-sref="pregister"
+                     class="md-raised md-primary md-hue-1">
+            Register
+          </md-button>
+        </div>
+      </md-menu-item>
+
+    </md-menu-content>
+  </md-menu>
+</md-menu-bar>

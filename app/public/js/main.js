@@ -17,8 +17,9 @@ var pAddpin   = require('./pages/paddpin');
 var pRegister = require('./pages/pregister');
 
 // Components
-var navigator = require('./components/navigator');
-var footer    = require('./components/footer');
+var navigator     = require('./components/navigator');
+var navigatormenu = require('./components/navigatormenu');
+var footer        = require('./components/footer');
 
 // Services
 var sFetchpins = require('./services/fetchpins');
@@ -36,6 +37,7 @@ var Application = angular.module('pb.application', [
     pAddpin.name,
     pRegister.name,
     navigator.name,
+    navigatormenu.name,
     footer.name,
     sFetchpins.name
 ]);
@@ -166,7 +168,7 @@ Application.config(function ($stateProvider, $urlRouterProvider) {
 
 // EOF -------------------------------------------------------------------------
 
-},{"./components/footer":4,"./components/navigator":5,"./pages/paddpin":8,"./pages/pregister":10,"./pages/pshow":12,"./services/fetchpins":15,"angular":26,"angular-animate":17,"angular-aria":19,"angular-material":21,"angular-messages":23,"angular-ui-router":24}],2:[function(require,module,exports){
+},{"./components/footer":4,"./components/navigator":5,"./components/navigatormenu":8,"./pages/paddpin":11,"./pages/pregister":13,"./pages/pshow":15,"./services/fetchpins":18,"angular":29,"angular-animate":20,"angular-aria":22,"angular-material":24,"angular-messages":26,"angular-ui-router":27}],2:[function(require,module,exports){
 // /app/public/ng-app/components/footer/footer-controller.js
 'use strict';
 
@@ -293,6 +295,51 @@ module.exports = function () {
 // EOF -------------------------------------------------------------------------
 
 },{}],8:[function(require,module,exports){
+// /app/public/ng-app/components/navigatormenu/index.js
+'use strict';
+
+var navigatormenuDirective  = require('./navigatormenu-directive');
+var navigatormenuController = require('./navigatormenu-controller');
+
+
+module.exports = angular
+  .module('pb.navigatorMenu', [])
+  .directive('pbNavigatorMenu', navigatormenuDirective)
+  .controller('pb.navigatorMenu.navigatorMenuCtrl', navigatormenuController);
+
+
+// EOF -------------------------------------------------------------------------
+
+},{"./navigatormenu-controller":9,"./navigatormenu-directive":10}],9:[function(require,module,exports){
+// /app/public/ng-app/components/navigatormenu/navigatormenu-controller.js
+'use strict';
+
+var navigatormenuController = function() {
+};
+
+
+module.exports = navigatormenuController;
+
+
+// EOF -------------------------------------------------------------------------
+
+},{}],10:[function(require,module,exports){
+// /app/public/ng-app/components/navigatormenu/navigatormenu-directive.js
+'use strict';
+
+module.exports = function () {
+  return {
+    restrict: 'E',
+    templateUrl: 'ng-app/components/navigatormenu/navigatormenu.html',
+    controller: 'pb.navigatorMenu.navigatorMenuCtrl',
+    controllerAs: 'navigatorMenuCtrl'
+  };
+};
+
+
+// EOF -------------------------------------------------------------------------
+
+},{}],11:[function(require,module,exports){
 // /app/public/ng-app/pages/paddpin/index.js
 'use strict';
 
@@ -306,7 +353,7 @@ module.exports = angular
 
 // EOF -------------------------------------------------------------------------
 
-},{"./paddpin-controller":9}],9:[function(require,module,exports){
+},{"./paddpin-controller":12}],12:[function(require,module,exports){
 // /app/public/ng-app/pages/paddpin/paddpin-controller.js
 'use strict';
 
@@ -372,7 +419,7 @@ module.exports = pAddpinCtrl;
 
 // EOF -------------------------------------------------------------------------
 
-},{}],10:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 // /app/public/ng-app/pages/pregister/index.js
 'use strict';
 
@@ -386,7 +433,7 @@ module.exports = angular
 
 // EOF -------------------------------------------------------------------------
 
-},{"./pregister-controller":11}],11:[function(require,module,exports){
+},{"./pregister-controller":14}],14:[function(require,module,exports){
 // /app/public/ng-app/pages/pregister/pregister-controller.js
 'use strict';
 
@@ -398,7 +445,7 @@ module.exports = pRegisterCtrl;
 
 // EOF -------------------------------------------------------------------------
 
-},{}],12:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 // /app/public/ng-app/pages/pshow/index.js
 'use strict';
 
@@ -412,7 +459,7 @@ module.exports = angular
 
 // EOF -------------------------------------------------------------------------
 
-},{"./pshow-controller":13}],13:[function(require,module,exports){
+},{"./pshow-controller":16}],16:[function(require,module,exports){
 // /app/public/ng-app/pages/pshow/pshow-controller.js
 'use strict';
 
@@ -570,7 +617,7 @@ module.exports = pShowCtrl;
 
 // EOF -------------------------------------------------------------------------
 
-},{}],14:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 // /app/public/ng-app/services/fetchpins/fetchpins-service.js
 'use strict';
 
@@ -607,7 +654,7 @@ module.exports = FetchpinsService;
 
 // EOF -------------------------------------------------------------------------
 
-},{}],15:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 // /app/public/ng-app/services/fetchpins/index.js
 'use strict';
 
@@ -621,7 +668,7 @@ module.exports = angular
 
 // EOF -------------------------------------------------------------------------
 
-},{"./fetchpins-service":14}],16:[function(require,module,exports){
+},{"./fetchpins-service":17}],19:[function(require,module,exports){
 /**
  * @license AngularJS v1.5.5
  * (c) 2010-2016 Google, Inc. http://angularjs.org
@@ -4770,11 +4817,11 @@ angular.module('ngAnimate', [])
 
 })(window, window.angular);
 
-},{}],17:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 require('./angular-animate');
 module.exports = 'ngAnimate';
 
-},{"./angular-animate":16}],18:[function(require,module,exports){
+},{"./angular-animate":19}],21:[function(require,module,exports){
 /**
  * @license AngularJS v1.5.5
  * (c) 2010-2016 Google, Inc. http://angularjs.org
@@ -5181,11 +5228,11 @@ ngAriaModule.directive('ngShow', ['$aria', function($aria) {
 
 })(window, window.angular);
 
-},{}],19:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 require('./angular-aria');
 module.exports = 'ngAria';
 
-},{"./angular-aria":18}],20:[function(require,module,exports){
+},{"./angular-aria":21}],23:[function(require,module,exports){
 /*!
  * Angular Material Design
  * https://github.com/angular/material
@@ -30144,7 +30191,7 @@ angular.module("material.core").constant("$MD_THEME_CSS", "/*  Only used with Th
 
 
 })(window, window.angular);;window.ngMaterial={version:{full: "1.0.8"}};
-},{}],21:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 // Should already be required, here for clarity
 require('angular');
 
@@ -30158,7 +30205,7 @@ require('./angular-material');
 // Export namespace
 module.exports = 'ngMaterial';
 
-},{"./angular-material":20,"angular":26,"angular-animate":17,"angular-aria":19}],22:[function(require,module,exports){
+},{"./angular-material":23,"angular":29,"angular-animate":20,"angular-aria":22}],25:[function(require,module,exports){
 /**
  * @license AngularJS v1.5.5
  * (c) 2010-2016 Google, Inc. http://angularjs.org
@@ -30882,11 +30929,11 @@ function ngMessageDirectiveFactory() {
 
 })(window, window.angular);
 
-},{}],23:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 require('./angular-messages');
 module.exports = 'ngMessages';
 
-},{"./angular-messages":22}],24:[function(require,module,exports){
+},{"./angular-messages":25}],27:[function(require,module,exports){
 /**
  * State-based routing for AngularJS
  * @version v0.3.0
@@ -35462,7 +35509,7 @@ angular.module('ui.router.state')
   .filter('isState', $IsStateFilter)
   .filter('includedByState', $IncludedByStateFilter);
 })(window, window.angular);
-},{}],25:[function(require,module,exports){
+},{}],28:[function(require,module,exports){
 /**
  * @license AngularJS v1.5.5
  * (c) 2010-2016 Google, Inc. http://angularjs.org
@@ -66331,8 +66378,8 @@ $provide.value("$locale", {
 })(window);
 
 !window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
-},{}],26:[function(require,module,exports){
+},{}],29:[function(require,module,exports){
 require('./angular');
 module.exports = angular;
 
-},{"./angular":25}]},{},[1]);
+},{"./angular":28}]},{},[1]);
