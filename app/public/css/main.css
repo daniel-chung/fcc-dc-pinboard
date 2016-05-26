@@ -58,10 +58,8 @@ a.pb-no-link:hover {
   margin: 1em 0;
 }
 
-
 /* Extending Font Awesome */
 .pb-fa-grey { color: #777; }
-
 
 
 /* -----------------------------------------------------------------
@@ -96,14 +94,12 @@ a.pb-no-link:hover {
 }
 
 .pb-pshow-content {
-  /*border: 1px solid #87CEFA;*/
   margin: .5em;
   padding: .5em;
   display: inline-block;
   text-align: left;
 }
 .pb-pshow-img-div {
-  /*border: 1px solid #ff9999;*/
   display: inline-block;
   float: left;
   margin: .5em;
@@ -150,8 +146,6 @@ md-menu-bar.md-default-theme md-menu > button:focus,
 md-menu-bar md-menu > button:focus {
   background-color: #42A5F5;
 }
-
-
 
 .pd-navigator-auth-btn {
   color: #fff;

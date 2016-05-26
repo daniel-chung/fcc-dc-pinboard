@@ -61,18 +61,14 @@ var PassportConfig = function(passport) {
     passReqToCallback: true
   },
   function(req, email, password, cb) {
-    console.log('req', req);
-
     User.findOne(
       {'local.email': email}, function(err, user) {
         if (err)
           return cb(err);
         if (user) {
-          console.log(user);
           return cb(null, user);
         }
         else {
-          console.log('creating new user');
           var newUser = new User();
           newUser.local.email = email;
           newUser.local.username = /^\w+@/.exec(email)[0];
@@ -95,8 +91,6 @@ var PassportConfig = function(passport) {
     passReqToCallback: true
   },
   function(req, email, password, cb) {
-    console.log('req', req);
-
     User.findOne(
       {'local.email': email}, function(err, user) {
         if (err)

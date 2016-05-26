@@ -11,7 +11,6 @@ var ngMessages = require('angular-messages');
 var ngMaterial = require('angular-material');
 
 // Pages
-var pLanding  = require('./pages/planding');
 var pShow     = require('./pages/pshow');
 var pAddpin   = require('./pages/paddpin');
 var pRegister = require('./pages/pregister');
@@ -32,7 +31,6 @@ var Application = angular.module('pb.application', [
     ngAria,
     ngMessages,
     ngMaterial,
-    pLanding.name,
     pShow.name,
     pAddpin.name,
     pRegister.name,
@@ -100,19 +98,10 @@ Application.config(function ($stateProvider, $urlRouterProvider) {
 
   // Default to the root
   $urlRouterProvider.otherwise("/");
-
   $urlRouterProvider.when("/", "/all");
 
   // Configure the states for Angular UI Routing
   $stateProvider
-    .state('planding', {
-      url: "/testlanding",
-      templateUrl: "ng-app/pages/planding/planding.html",
-      controller: 'pb.planding.plandingCtrl',
-      controllerAs: 'plandingCtrl',
-      access: {restricted: false}
-    })
-    // Make this an abstract class?
     .state('pshow', {
       url: "/",
       abstract: true,

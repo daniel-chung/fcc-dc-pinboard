@@ -11,10 +11,6 @@ function PinsServices () {
 
   // Adds a pin to our database ------------------------------------------- //
   this.add = function (req, res) {
-    console.log("inside Pinsservice add");
-    console.log(req.body);
-    console.log(req.user);
-
     var newPin      = new Pins();
     newPin.pinname  = req.body.pinname;
     newPin.url      = req.body.url;
@@ -31,7 +27,6 @@ function PinsServices () {
   // Fetches all public pins ---------------------------------------------- //
   // TODO(): limit to some number of pins (50?)
   this.getall = function (req, res) {
-    console.log("inside pinservice getall");
     Pins.find(
       {},
       function(err, pins) {
@@ -45,8 +40,6 @@ function PinsServices () {
   // Fetches current user's pins ------------------------------------------ //
   // TODO(): limit to some number of pins (50?)
   this.getself = function (req, res) {
-    console.log("inside pinservice getself");
-    console.log('current user:', req.user);
     var currUsername = req.user.hasOwnProperty('twitter') ?
       req.user.twitter.username : req.user.local.username;
     Pins.find(
@@ -62,8 +55,6 @@ function PinsServices () {
   // Fetches a user's pins ------------------------------------------------ //
   // TODO(): limit to some number of pins (50?)
   this.getuser = function (req, res) {
-    console.log("inside pinservice get user");
-    console.log(req.params);
     Pins.find(
       {"username": req.params.username},
       function(err, pins) {
@@ -77,8 +68,6 @@ function PinsServices () {
 
   // Deletes a user's pin ------------------------------------------------- //
   this.deletepin = function (req, res) {
-    console.log("inside pinservice deletepin");
-    console.log("delete pin param:", req.params);
     var currPinid = req.params.pinid;
     var currUsername = req.user.hasOwnProperty('twitter') ?
       req.user.twitter.username : req.user.local.username;
@@ -103,8 +92,6 @@ function PinsServices () {
 
   // Likes a user's pin --------------------------------------------------- //
   this.likePin = function (req, res) {
-    console.log('req user', req.user._id);
-    console.log('like pin', req.body);
     var userId = req.user._id;
     var pinId = req.body.pinId;
 
@@ -114,7 +101,6 @@ function PinsServices () {
         if (err)
           console.log('err', err);
 
-        console.log('user', user, user.length);
         // Add a like
         if (user.length == 0) {
           addLike(userId, pinId, res);
