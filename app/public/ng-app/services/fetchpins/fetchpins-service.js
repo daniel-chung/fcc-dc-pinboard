@@ -23,6 +23,11 @@ FetchpinsService.prototype.likePin = function(id) {
   return this._http.post(apiUrl, {pinId: id});
 };
 
+FetchpinsService.prototype.isLoggedIn = function() {
+  var apiUrl = '/auth/isloggedin';
+  return this._http.get(apiUrl);
+};
+
 
 module.exports = FetchpinsService;
 

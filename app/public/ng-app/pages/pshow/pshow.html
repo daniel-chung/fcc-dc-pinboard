@@ -1,14 +1,10 @@
-<div class="pb-pshow">
-
+<div class="pb-pshow" id="popupContainer">
   <h1 class="pb-pshow-title">{{pshowCtrl.title_}}</h1>
 
   <div class="pb-pshow-content">
-
     <div class="container" ng-repeat='key in pshowCtrl.pins_ track by $index'>
-
       <md-card class="pb-pshow-img-div pb-pshow-img"
                ng-repeat="pin in pshowCtrl.pins_[$index] track by pin._id">
-
         <div class="pb-pshow-img-clear"
              ng-click="pshowCtrl.delete(pin._id)"
              ng-if="pshowCtrl.owners_==='self'">
@@ -32,17 +28,13 @@
         <div class="pb-hr"></div>
         <div>
           <md-button class="md-icon-button" aria-label="Favorite"
-                     ng-click="pshowCtrl.like(pin._id)">
+                     ng-click="pshowCtrl.like(pin._id, $event)">
             <i class="fa fa-heart pb-fa-grey" aria-hidden="true"></i>
             {{pin.likescount}}
           </md-button>
         </div>
-
       </md-card>
-
     </div>
-
-
   </div>
 
 </div>

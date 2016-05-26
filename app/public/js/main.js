@@ -321,10 +321,12 @@ module.exports = angular
 // /app/public/ng-app/pages/paddpin/paddpin-controller.js
 'use strict';
 
-var pAddpinCtrl = function(Fetchpins, $http) {
+var pAddpinCtrl = function(Fetchpins, $http, $mdDialog, $state) {
 
   // $http service from angular
   this.http_ = $http;
+  this.mdDialog_ = $mdDialog;
+  this.state_ = $state;
 
   // Data models for our form
   this.pinaddForm = {
@@ -336,11 +338,11 @@ var pAddpinCtrl = function(Fetchpins, $http) {
 
 pAddpinCtrl.prototype.pinadd = function(form) {
 
-  var successCallback = function (response) {
+  var successCallback = function(response) {
     this.pinaddForm.pinname = '';
-    this.pinaddForm.url     = '';
+    this.pinaddForm.url = '';
+    this.addpinAlert();
   };
-
   var errorCallback = function(response) {
     console.log(response.status);
   };
@@ -354,6 +356,25 @@ pAddpinCtrl.prototype.pinadd = function(form) {
   // Clear error messages on submit
   form.$setPristine();
   form.$setUntouched();
+};
+
+
+pAddpinCtrl.prototype.addpinAlert = function() {
+  var confirm = this.mdDialog_.confirm()
+      .title('Successfully added a pin!')
+      .textContent('Do you want to add a new pin or return to your pins page?')
+      .ariaLabel('Added pin')
+      .ok('Show my pins')
+      .cancel('Add another pin');
+
+  this.mdDialog_.show(confirm).then(
+    (function() {
+      this.state_.go('pshow.self');
+    }).bind(this),
+    (function() {
+      this.state_.go('paddpin');
+    }).bind(this)
+  );
 };
 
 
@@ -434,14 +455,27 @@ module.exports = angular
 // /app/public/ng-app/pages/pshow/pshow-controller.js
 'use strict';
 
-var pShowCtrl = function(Fetchpins, pinOwners, $state, $scope, $window) {
+var pShowCtrl = function(Fetchpins, pinOwners,
+    $state, $scope, $window, $mdToast, $mdDialog) {
 
   // Services -------------------------------------------------------
+  this.mdDialog_ = $mdDialog;
+  this.mdToast_ = $mdToast;
   this.state_ = $state;
   this.fetchpins_ = Fetchpins;
 
   // Resolved data from Angular UI Router ---------------------------
   this.owners_ = pinOwners;
+
+  this.isLoggedIn_ = false;
+  this.fetchpins_.isLoggedIn().then(
+    (function(res) {
+      this.isLoggedIn_ = res.data
+    }).bind(this),
+    function(err) {
+      console.log('err', err);
+    }
+  );
 
   // Data models ----------------------------------------------------
   // Title to display
@@ -508,33 +542,42 @@ pShowCtrl.prototype.errorCallback = function(err) {
 // Delete -----------------------------------------------------------
 pShowCtrl.prototype.delete = function(id) {
   this.fetchpins_.deletePin(id).then(
-    this.deleteSuccessCallback.bind(this),
-    this.deleteErrorCallback.bind(this)
+    this.reloadCallback.bind(this),
+    this.reloadCallback.bind(this)
   );
-};
-pShowCtrl.prototype.deleteSuccessCallback = function() {
-  this.state_.reload();
-};
-pShowCtrl.prototype.deleteErrorCallback = function(err) {
-  console.log('Error:', err);
-  this.state_.reload();
 };
 
 // Like button ------------------------------------------------------
-pShowCtrl.prototype.like = function(id) {
-  console.log('id', id);
-  this.fetchpins_.likePin(id).then(
-    (function(res) {
-      console.log('like success', res);
-      this.state_.reload();
-    }).bind(this),
-    (function(res) {
-      console.log('like error', res);
-      this.state_.reload();
-    }).bind(this)
-  );
+pShowCtrl.prototype.like = function(id, event) {
+  if (this.isLoggedIn_) {
+    this.fetchpins_.likePin(id).then(
+      this.reloadCallback.bind(this),
+      this.reloadCallback.bind(this)
+    );
+  }
+  else {
+    this.loginAlert(event);
+  }
 };
 
+// Reload callbacks -------------------------------------------------
+pShowCtrl.prototype.reloadCallback = function(res) {
+  this.state_.reload();
+};
+
+// Show toast -------------------------------------------------------
+pShowCtrl.prototype.loginAlert = function($ev) {
+  this.mdDialog_.show(
+    this.mdDialog_.alert()
+      .parent(angular.element(document.querySelector('#popupContainer')))
+      .clickOutsideToClose(true)
+      .title('Not logged in')
+      .textContent('You must be logged in to vote on pins')
+      .ariaLabel('Must be logged in')
+      .ok('Got it!')
+      .targetEvent($ev)
+    );
+};
 
 // Other methods ----------------------------------------------------
 pShowCtrl.prototype.distributePins = function() {
@@ -590,6 +633,11 @@ FetchpinsService.prototype.deletePin = function(id) {
 FetchpinsService.prototype.likePin = function(id) {
   var apiUrl = '/api/like';
   return this._http.post(apiUrl, {pinId: id});
+};
+
+FetchpinsService.prototype.isLoggedIn = function() {
+  var apiUrl = '/auth/isloggedin';
+  return this._http.get(apiUrl);
 };
 
 

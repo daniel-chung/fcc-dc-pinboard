@@ -1,14 +1,27 @@
 // /app/public/ng-app/pages/pshow/pshow-controller.js
 'use strict';
 
-var pShowCtrl = function(Fetchpins, pinOwners, $state, $scope, $window) {
+var pShowCtrl = function(Fetchpins, pinOwners,
+    $state, $scope, $window, $mdToast, $mdDialog) {
 
   // Services -------------------------------------------------------
+  this.mdDialog_ = $mdDialog;
+  this.mdToast_ = $mdToast;
   this.state_ = $state;
   this.fetchpins_ = Fetchpins;
 
   // Resolved data from Angular UI Router ---------------------------
   this.owners_ = pinOwners;
+
+  this.isLoggedIn_ = false;
+  this.fetchpins_.isLoggedIn().then(
+    (function(res) {
+      this.isLoggedIn_ = res.data
+    }).bind(this),
+    function(err) {
+      console.log('err', err);
+    }
+  );
 
   // Data models ----------------------------------------------------
   // Title to display
@@ -75,33 +88,42 @@ pShowCtrl.prototype.errorCallback = function(err) {
 // Delete -----------------------------------------------------------
 pShowCtrl.prototype.delete = function(id) {
   this.fetchpins_.deletePin(id).then(
-    this.deleteSuccessCallback.bind(this),
-    this.deleteErrorCallback.bind(this)
+    this.reloadCallback.bind(this),
+    this.reloadCallback.bind(this)
   );
-};
-pShowCtrl.prototype.deleteSuccessCallback = function() {
-  this.state_.reload();
-};
-pShowCtrl.prototype.deleteErrorCallback = function(err) {
-  console.log('Error:', err);
-  this.state_.reload();
 };
 
 // Like button ------------------------------------------------------
-pShowCtrl.prototype.like = function(id) {
-  console.log('id', id);
-  this.fetchpins_.likePin(id).then(
-    (function(res) {
-      console.log('like success', res);
-      this.state_.reload();
-    }).bind(this),
-    (function(res) {
-      console.log('like error', res);
-      this.state_.reload();
-    }).bind(this)
-  );
+pShowCtrl.prototype.like = function(id, event) {
+  if (this.isLoggedIn_) {
+    this.fetchpins_.likePin(id).then(
+      this.reloadCallback.bind(this),
+      this.reloadCallback.bind(this)
+    );
+  }
+  else {
+    this.loginAlert(event);
+  }
 };
 
+// Reload callbacks -------------------------------------------------
+pShowCtrl.prototype.reloadCallback = function(res) {
+  this.state_.reload();
+};
+
+// Show toast -------------------------------------------------------
+pShowCtrl.prototype.loginAlert = function($ev) {
+  this.mdDialog_.show(
+    this.mdDialog_.alert()
+      .parent(angular.element(document.querySelector('#popupContainer')))
+      .clickOutsideToClose(true)
+      .title('Not logged in')
+      .textContent('You must be logged in to vote on pins')
+      .ariaLabel('Must be logged in')
+      .ok('Got it!')
+      .targetEvent($ev)
+    );
+};
 
 // Other methods ----------------------------------------------------
 pShowCtrl.prototype.distributePins = function() {

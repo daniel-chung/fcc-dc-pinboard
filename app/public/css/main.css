@@ -21,7 +21,6 @@ body {
 
 body,
 div#main,
-md-content.pb-background,
 .pb-background {
   background-color: #EEE;
 }
