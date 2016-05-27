@@ -71,7 +71,7 @@ Application.run(function ($rootScope, $state, $http, $q) {
 
           // Redirect based on authentication
           if (toState.access.restricted && isLoggedIn === false) {
-            $state.go('pshow');
+            $state.go('pshow.all');
           }
         })
         .catch(function () {
