@@ -42,7 +42,7 @@ $ npm run watch:bundle
 
 Finally, in a third terminal window, start up our development local server. The following command will start up our server using nodemon, which will also watch for changes and restart our server:
 ```sh
-npm run start:dev
+$ npm run start:dev
 ```
 
 
