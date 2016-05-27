@@ -1,7 +1,7 @@
 <div class="pb-pshow" id="popupContainer">
-  <h1 class="pb-pshow-title">{{pshowCtrl.title_}}</h1>
-
   <div class="pb-pshow-content">
+    <h1 class="pb-pshow-title md-headline">{{pshowCtrl.title_}}</h1>
+
     <div class="container" ng-repeat='key in pshowCtrl.pins_ track by $index'>
       <md-card class="pb-pshow-img-div pb-pshow-img"
                ng-repeat="pin in pshowCtrl.pins_[$index] track by pin._id">
