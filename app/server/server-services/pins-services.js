@@ -53,7 +53,6 @@ function PinsServices () {
   };
 
   // Fetches a user's pins ------------------------------------------------ //
-  // TODO(): limit to some number of pins (50?)
   this.getuser = function (req, res) {
     Pins.find(
       {"username": req.params.username},
@@ -64,7 +63,6 @@ function PinsServices () {
       }
     );
   };
-
 
   // Deletes a user's pin ------------------------------------------------- //
   this.deletepin = function (req, res) {

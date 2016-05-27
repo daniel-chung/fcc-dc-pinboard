@@ -28,39 +28,37 @@
       <!-- 2 Email login -->
       <div layout="column" ng-cloak>
         <md-content layout-padding>
+          <form name="localLogInForm" action="/auth/local/login"
+                method="post">
 
-        <form name="localLogInForm" action="/auth/local/login"
-              method="post">
-          <div class="pb-text-center">Sign in with E-mail</div>
+            <div class="pb-text-center">Sign in with E-mail</div>
 
-          <md-input-container class="md-block">
-            <label>E-mail</label>
-            <input required name="email" type="text"
-                   ng-model="local.email">
-            <div ng-messages="localLogInForm.email.$error">
-              <div ng-message="required">This is required.</div>
+            <md-input-container class="md-block">
+              <label>E-mail</label>
+              <input required name="email" type="text"
+                     ng-model="local.email">
+              <div ng-messages="localLogInForm.email.$error">
+                <div ng-message="required">This is required.</div>
+              </div>
+            </md-input-container>
+
+            <md-input-container class="md-block">
+              <label>Password</label>
+              <input required name="password" type="password"
+                     ng-model="local.password">
+              <div ng-messages="localLogInForm.password.$error">
+                <div ng-message="required">This is required.</div>
+              </div>
+            </md-input-container>
+
+            <div class="pb-text-center pb-navigator-margin-top-15"
+                 layout="column" layout-align="center stretch">
+              <md-button type="submit" id="submit" value="Submit"
+                         class="md-raised md-primary md-hue-1">
+                Sign in
+              </md-button>
             </div>
-          </md-input-container>
-
-          <md-input-container class="md-block">
-            <label>Password</label>
-            <input required name="password" type="password"
-                   ng-model="local.password">
-            <div ng-messages="localLogInForm.password.$error">
-              <div ng-message="required">This is required.</div>
-            </div>
-          </md-input-container>
-
-          <div class="pb-text-center pb-navigator-margin-top-15"
-               layout="column" layout-align="center stretch">
-            <md-button type="submit" id="submit" value="Submit"
-                       class="md-raised md-primary md-hue-1">
-              Sign in
-            </md-button>
-          </div>
-
-        </form>
-
+          </form>
         </md-content>
       </div>
 

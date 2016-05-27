@@ -2,7 +2,6 @@
 'use strict';
 
 var FetchpinsService = function($http) {
-
   // Bind Angular's HTTP service to our service for functional prototypes
   this._http = $http;
 };

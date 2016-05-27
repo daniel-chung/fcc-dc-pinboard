@@ -51,7 +51,6 @@ require('./server/config/passport')(passport);
 // set the static files location; /public/img will be /img for users
 app.use(express.static(__dirname + '/public'));
 app.use('/node_modules', express.static(__dirname + '/../node_modules'));
-//app.use('/ng-app', express.static(__dirname + '/ng-app'));
 
 
 // Setup Express routes --------------------------------------------------------

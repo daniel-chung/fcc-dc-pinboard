@@ -4,7 +4,7 @@
   "description": "A pinterest clone built with Angular, Material, Node, Express, and Mongo",
   "main": "server.js",
   "scripts": {
-    "build": "npm run build:bundle",
+    "build": "browserify ./app/public/ng-app/app.js > ./app/public/js/main.js",
     "watch:bundle": "watchify ./app/public/ng-app/app.js -o ./app/public/js/main.js -v",
     "start": "node app/server.js",
     "start:dev": "VERSION=DEV nodemon app/server.js",

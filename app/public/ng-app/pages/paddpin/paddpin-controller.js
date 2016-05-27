@@ -13,11 +13,12 @@ var pAddpinCtrl = function(Fetchpins, $http, $mdDialog, $state) {
     'pinname': '',
     'url': ''
   };
-}
+};
 
 
 pAddpinCtrl.prototype.pinadd = function(form) {
 
+  // Helper callback functions
   var successCallback = function(response) {
     this.pinaddForm.pinname = '';
     this.pinaddForm.url = '';
@@ -38,8 +39,14 @@ pAddpinCtrl.prototype.pinadd = function(form) {
   form.$setUntouched();
 };
 
-
 pAddpinCtrl.prototype.addpinAlert = function() {
+
+  // Helper callback functions
+  var mdDialogCallback = function(transitionToState) {
+    this.state_.go(transitionToState);
+  };
+
+  // Dialog setup
   var confirm = this.mdDialog_.confirm()
       .title('Successfully added a pin!')
       .textContent('Do you want to add a new pin or return to your pins page?')
@@ -48,12 +55,8 @@ pAddpinCtrl.prototype.addpinAlert = function() {
       .cancel('Add another pin');
 
   this.mdDialog_.show(confirm).then(
-    (function() {
-      this.state_.go('pshow.self');
-    }).bind(this),
-    (function() {
-      this.state_.go('paddpin');
-    }).bind(this)
+    mdDialogCallback.bind(this, 'pshow.self'),
+    mdDialogCallback.bind(this, 'paddpin')
   );
 };
 
